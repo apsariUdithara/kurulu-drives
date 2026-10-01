@@ -1,0 +1,12 @@
+---
+import { site } from '../data/site';
+const { updated = site.lastUpdated } = Astro.props;
+const pretty = new Date(updated).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<div class="author-box">
+  <p>
+    Written by <strong>{site.author.name}</strong>, {site.author.role}.
+    Last updated <time datetime={updated}>{pretty}</time>.
+  </p>
+</div>

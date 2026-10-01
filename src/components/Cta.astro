@@ -1,0 +1,9 @@
+---
+import { site } from '../data/site';
+const { text = 'Tell us your dates and group size and we will send a fixed, all-inclusive quote within 24 hours.' } = Astro.props;
+---
+
+<section class="cta">
+  <p>{text}</p>
+  <a class="btn" href={`mailto:${site.email}?subject=Trip%20quote`}>Ask for a quote</a>
+</section>
