@@ -91,7 +91,7 @@ const sources = [
 
   <h2>How much does a 7, 10 or 14-day trip with a driver cost?</h2>
   <div class="table-wrap">
-    <table>
+    <table class="stack">
       <caption>Driver and vehicle only, for the full itinerary. Hotels, tickets and safaris are extra.</caption>
       <thead>
         <tr>
@@ -106,10 +106,10 @@ const sources = [
         {tours.map((t) => (
           <tr>
             <th scope="row"><a href={`/tours/${t.slug}/`}>{t.title}</a></th>
-            <td class="num">{t.days}</td>
-            <td class="num">~{totalKm(t).toLocaleString('en-US')} km</td>
-            <td class="num">{usd(t.days * rates.sedan.perDay)}<br /><span class="muted">{lkr(t.days * rates.sedan.perDay)}</span></td>
-            <td class="num">{usd(t.days * rates.van.perDay)}<br /><span class="muted">{lkr(t.days * rates.van.perDay)}</span></td>
+            <td class="num" data-label="Days">{t.days}</td>
+            <td class="num" data-label="Distance">~{totalKm(t).toLocaleString('en-US')} km</td>
+            <td class="num" data-label="Sedan">{usd(t.days * rates.sedan.perDay)}<br /><span class="muted">{lkr(t.days * rates.sedan.perDay)}</span></td>
+            <td class="num" data-label="Van">{usd(t.days * rates.van.perDay)}<br /><span class="muted">{lkr(t.days * rates.van.perDay)}</span></td>
           </tr>
         ))}
       </tbody>

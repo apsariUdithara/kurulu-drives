@@ -49,7 +49,7 @@ const sources = [
 
   <h2>How long does it take, and how much does it cost, from Colombo airport?</h2>
   <div class="table-wrap">
-    <table>
+    <table class="stack">
       <caption>One-way, per vehicle. Sedan for 1–3 travellers, van for 4–8. Times are typical door to door and vary with traffic.</caption>
       <thead>
         <tr>
@@ -64,10 +64,10 @@ const sources = [
         {transfers.map((t) => (
           <tr>
             <th scope="row">{t.to}</th>
-            <td class="num">~{t.km} km</td>
-            <td class="num">{t.time}</td>
-            <td class="num">US${t.sedan}<br /><span class="muted">{lkr(t.sedan)}</span></td>
-            <td class="num">US${t.van}<br /><span class="muted">{lkr(t.van)}</span></td>
+            <td class="num" data-label="Distance">~{t.km} km</td>
+            <td class="num" data-label="Time">{t.time}</td>
+            <td class="num" data-label="Sedan">US${t.sedan}<br /><span class="muted">{lkr(t.sedan)}</span></td>
+            <td class="num" data-label="Van">US${t.van}<br /><span class="muted">{lkr(t.van)}</span></td>
           </tr>
         ))}
       </tbody>

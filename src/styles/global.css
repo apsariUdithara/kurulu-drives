@@ -85,6 +85,17 @@ th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--li
 thead th { background: var(--tint); font-weight: 700; white-space: nowrap; }
 tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
 td.num, th.num { text-align: right; white-space: nowrap; }
+/* Wide tables become one card per row on phones; data-label names each value. */
+@media (max-width: 640px) {
+  .stack thead { display: none; }
+  .stack tr { display: block; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  .stack tbody tr:last-child { border-bottom: 0; }
+  .stack th, .stack td { display: block; border: 0; padding: 2px 0; text-align: left; white-space: normal; }
+  .stack th[scope='row'] { font-weight: 700; }
+  .stack [data-label]::before { content: attr(data-label) ': '; font-weight: 600; color: var(--muted); }
+  .stack td br { display: none; }
+  .stack td .muted::before { content: ' · '; }
+}
 caption { caption-side: bottom; text-align: left; padding: 8px 12px; color: var(--muted); font-size: 0.85rem; }
 
 /* FAQ */

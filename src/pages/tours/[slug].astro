@@ -61,7 +61,7 @@ const sources = [
 
   <h2>What is the day-by-day plan?</h2>
   <div class="table-wrap">
-    <table>
+    <table class="stack">
       <caption>Distances and drive times are approximate road figures; drive times exclude stops.</caption>
       <thead>
         <tr>
@@ -76,12 +76,12 @@ const sources = [
       <tbody>
         {t.plan.map((d, i) => (
           <tr>
-            <th scope="row" class="num">{i + 1}</th>
-            <td>{d.route}</td>
-            <td class="num">{d.km ? `${d.km} km` : '—'}</td>
-            <td>{d.hours}</td>
-            <td>{d.highlights}</td>
-            <td>{d.overnight}</td>
+            <th scope="row" class="num" data-label="Day">{i + 1}</th>
+            <td data-label="Route">{d.route}</td>
+            <td class="num" data-label="Distance">{d.km ? `${d.km} km` : '—'}</td>
+            <td data-label="Drive time">{d.hours}</td>
+            <td data-label="Highlights">{d.highlights}</td>
+            <td data-label="Overnight">{d.overnight}</td>
           </tr>
         ))}
       </tbody>
