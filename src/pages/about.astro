@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+import KeyFacts from '../components/KeyFacts.astro';
+import Cta from '../components/Cta.astro';
+import AuthorBox from '../components/AuthorBox.astro';
+import { site, rates, transfers } from '../data/site';
+import { tours } from '../data/tours';
+import { organization } from '../lib/schema';
+
+const base = Astro.site!;
+// Distances from Kandy, taken from the itinerary and transfer data so they match the other pages.
+const leg = (route: string) => tours.flatMap((t) => t.plan).find((d) => d.route === route)!;
+const fromSigiriya = leg('Sigiriya → Kandy');
+const toNuwara = leg('Kandy → Nuwara Eliya');
+const fromAirport = transfers.find((t) => t.to === 'Kandy')!;
+---
+
+<Base
+  title={`About ${site.name}: private drivers based in Kandy`}
+  description={`${site.name} is a private driver and tour service based in Kandy, Sri Lanka. Who we are, how we work, where we drive, and why this is a demo business.`}
+  crumbs={[{ name: 'About', path: '/about/' }]}
+  schema={[organization(base)]}
+>
+  <h1>About {site.name}</h1>
+  <p class="lead">
+    {site.name} is a private driver and tour service based in {site.address.locality}, Sri Lanka, with English-speaking
+    chauffeur-guides, air-conditioned cars and vans, and one all-inclusive day rate. It is a demo business, created in
+    {site.founded} for a technical assessment: the people and contact details on this site are fictional, and no bookings
+    are taken.
+  </p>
+
+  <KeyFacts>
+    <ul>
+      <li>Based in {site.address.locality}, {site.address.region}; drives all over Sri Lanka.</li>
+      <li>Services: multi-day round trips, Colombo airport (CMB) transfers and day trips.</li>
+      <li>Day rates: US${rates.sedan.perDay} by sedan, US${rates.van.perDay} by van, including the driver's food and room.</li>
+      <li>Languages: English and Sinhala.</li>
+      <li>Demo business: no real staff, reviews or licences.</li>
+    </ul>
+  </KeyFacts>
+
+  <h2>Is {site.name} a real company?</h2>
+  <p>
+    No. {site.name} was built as a demonstration of AI Search Optimisation: a realistic small travel business whose pages
+    are written to be easy for search engines and AI assistants to read and cite. The travel facts (distances, rail status,
+    tipping guidance, market prices) are real and sourced on each page. The business itself, its people and its email
+    address are not, so please do not try to book.
+  </p>
+  <p>
+    That is also why this site shows no reviews, star ratings or testimonials: there are no real customers, and inventing
+    them would mislead you.
+  </p>
+
+  <h2>Why is the business based in Kandy?</h2>
+  <p>
+    Kandy sits in the middle of the island's main travel routes, so a driver based there is never far from a pickup. It is
+    about {fromAirport.km} km ({fromAirport.time}) from Colombo airport, {fromSigiriya.km} km from Sigiriya in the Cultural
+    Triangle and {toNuwara.km} km from Nuwara Eliya in the tea country. The name comes from Sinhala: <i lang="si-Latn">kurulu</i> means "bird".
+  </p>
+
+  <h2>Who are the people behind it?</h2>
+  <div class="table-wrap">
+    <table>
+      <caption>Both people are fictional, created for this demo.</caption>
+      <thead>
+        <tr><th scope="col">Name</th><th scope="col">Role</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">{site.author.name}</th><td>{site.author.role}. Writes the guides on this site.</td></tr>
+        <tr><th scope="row">Chaminda</th><td>{site.driverQuoteName.slice(site.driverQuoteName.indexOf(', ') + 2)}. Quoted in the guides.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>How does booking work?</h2>
+  <ol>
+    <li>Send your dates, group size and the places you want to see.</li>
+    <li>Get a fixed, written, all-inclusive quote within 24 hours.</li>
+    <li>Pay a 20% deposit to confirm; the rest is paid during the trip.</li>
+    <li>Your driver meets you at Colombo airport or your hotel and stays with you for the whole trip.</li>
+  </ol>
+  <p>
+    Details are on the <a href="/pricing/">prices page</a> and in the <a href="/faq/">FAQ</a>. For sample routes, see the <a href="/tours/7-day-classic/">7-day</a>, <a href="/tours/10-day-highlights/">10-day</a> and <a href="/tours/14-day-grand-tour/">14-day</a> itineraries.
+  </p>
+
+  <h2>What are the business details?</h2>
+  <div class="table-wrap">
+    <table>
+      <tbody>
+        <tr><th scope="row">Name</th><td>{site.name}</td></tr>
+        <tr><th scope="row">Base</th><td>{site.address.locality}, {site.address.region}, {site.address.countryName}</td></tr>
+        <tr><th scope="row">Service area</th><td>All of {site.address.countryName}</td></tr>
+        <tr><th scope="row">Vehicles</th><td>{Object.values(rates).map((r) => r.label).join('; ')}</td></tr>
+        <tr><th scope="row">Founded</th><td>{site.founded} (demo)</td></tr>
+        <tr><th scope="row">Email</th><td><a href={`mailto:${site.email}`}>{site.email}</a> (placeholder, does not receive mail)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <Cta />
+  <AuthorBox />
+</Base>
