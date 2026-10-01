@@ -53,6 +53,7 @@ main { padding-bottom: 48px; }
 
 /* Photos */
 .photo { margin: 0; }
+main > .photo { max-width: 720px; margin: 20px 0; }
 .photo img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius); }
 .photo figcaption { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
 .photo figcaption a { color: inherit; }
