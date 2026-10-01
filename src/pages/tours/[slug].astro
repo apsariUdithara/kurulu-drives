@@ -1,0 +1,118 @@
+---
+import Base from '../../layouts/Base.astro';
+import KeyFacts from '../../components/KeyFacts.astro';
+import Cta from '../../components/Cta.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+import Sources from '../../components/Sources.astro';
+import { rates, lkr } from '../../data/site';
+import { tours, totalKm, type Tour } from '../../data/tours';
+import { tourTrip } from '../../lib/schema';
+
+export function getStaticPaths() {
+  return tours.map((t) => ({ params: { slug: t.slug }, props: { t } }));
+}
+
+const { t } = Astro.props as { t: Tour };
+const base = Astro.site!;
+const path = `/tours/${t.slug}/`;
+const usd = (n: number) => `US$${n.toLocaleString('en-US')}`;
+const km = totalKm(t);
+const sedan = t.days * rates.sedan.perDay;
+const van = t.days * rates.van.perDay;
+const longest = t.plan.reduce((a, d) => (d.km > a.km ? d : a));
+const trainDay = t.plan.findIndex((d) => d.hours.includes('Nanu Oya')) + 1;
+const others = tours.filter((o) => o !== t);
+
+const sources = [
+  { title: 'Responsible Travel: Best time to visit Sri Lanka', url: 'https://www.responsibletravel.com/holidays/sri-lanka/travel-guide/best-time-to-visit-sri-lanka' },
+  { title: 'Sunday Times (21 June 2026): Podi Menike runs again from Nanu Oya to Badulla', url: 'https://www.sundaytimes.lk/260621/news/podi-menike-hits-the-tracks-from-nanu-oya-to-badulla-marking-latest-phase-of-restoration-646913.html' },
+  { title: 'Newswire (8 Sept 2026): Nanu Oya–Great Western railway repairs to be completed by December', url: 'https://www.newswire.lk/2026/09/08/nanu-oya-great-western-railway-repairs-to-be-completed-by-december/' },
+  { title: 'Rome2Rio: Colombo airport (CMB) to Kandy', url: 'https://www.rome2rio.com/s/Colombo-Airport-CMB/Kandy' },
+];
+---
+
+<Base
+  title={t.title}
+  description={`Day-by-day ${t.days}-day Sri Lanka route with km and drive time for every leg. Private driver and A/C sedan: ${usd(sedan)} in total, all-inclusive.`}
+  crumbs={[{ name: t.title, path }]}
+  schema={[tourTrip(base, t, path)]}
+>
+  <h1>{t.title}</h1>
+  <p class="lead">
+    {t.summary} With a private driver it costs {usd(sedan)} by sedan or {usd(van)} by van for the whole trip.
+  </p>
+
+  <KeyFacts>
+    <ul>
+      <li>{t.days} days, about {km.toLocaleString('en-US')} km by road, starting and ending at Colombo airport (CMB).</li>
+      <li>Driver and vehicle: {usd(sedan)} by sedan ({lkr(sedan)}) or {usd(van)} by van ({lkr(van)}), including fuel, tolls and the driver's costs.</li>
+      <li>Longest drive: {longest.route}, about {longest.km} km ({longest.hours}).</li>
+      <li>Places: {t.places.join(', ')}.</li>
+      <li>Best for: {t.bestFor}</li>
+    </ul>
+  </KeyFacts>
+
+  <h2>What is the day-by-day plan?</h2>
+  <div class="table-wrap">
+    <table>
+      <caption>Distances and drive times are approximate road figures; drive times exclude stops.</caption>
+      <thead>
+        <tr>
+          <th scope="col" class="num">Day</th>
+          <th scope="col">Route</th>
+          <th scope="col" class="num">Distance</th>
+          <th scope="col">Drive time</th>
+          <th scope="col">Highlights</th>
+          <th scope="col">Overnight</th>
+        </tr>
+      </thead>
+      <tbody>
+        {t.plan.map((d, i) => (
+          <tr>
+            <th scope="row" class="num">{i + 1}</th>
+            <td>{d.route}</td>
+            <td class="num">{d.km ? `${d.km} km` : '—'}</td>
+            <td>{d.hours}</td>
+            <td>{d.highlights}</td>
+            <td>{d.overnight}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Can you take the train to Ella on this trip?</h2>
+  <p>
+    Yes, on day {trainDay}. The hill-country train from Nanu Oya (near Nuwara Eliya) to Ella has run again since
+    20 June 2026, after repairs from Cyclone Ditwah. The Kandy end of the line is still closed, with repairs targeted for the
+    end of 2026, so your driver takes you to Nanu Oya by road, drives your luggage to Ella and meets you at the station.
+    Check the status before you travel; earlier reopening dates have slipped.
+  </p>
+
+  <h2>When is the best time to do this trip?</h2>
+  <p>
+    December to April. This route ends on the south coast, which gets the south-west monsoon from May to September, when
+    the beaches at Galle and Mirissa are wetter and the sea is rougher. The north-east monsoon (October to January) brings rain
+    mainly to the east and north. You can still do the trip from May to September; expect more rain on the coastal days.
+  </p>
+
+  <h2>How much does this itinerary cost?</h2>
+  <p>
+    The driver and vehicle cost {usd(rates.sedan.perDay)} per day by sedan (1–3 travellers) or {usd(rates.van.perDay)} by van
+    (4–8 travellers): {usd(sedan)} or {usd(van)} for {t.days} days. Hotels, entrance tickets and safari jeeps are extra. See
+    <a href="/pricing/">how much a private driver in Sri Lanka costs</a> for what is included.
+  </p>
+
+  <section class="related">
+    <h2>Related</h2>
+    <ul>
+      {others.map((o) => <li><a href={`/tours/${o.slug}/`}>{o.title}</a></li>)}
+      <li><a href="/guides/airport-transfers/">Colombo airport (CMB) transfers: times and prices</a></li>
+      <li><a href="/guides/driver-vs-train/">Private driver vs train vs tuk-tuk in Sri Lanka</a></li>
+    </ul>
+  </section>
+
+  <Cta text={`Want this ${t.days}-day route, or a changed version? Send your dates and group size for a fixed quote within 24 hours.`} />
+  <AuthorBox />
+  <Sources items={sources} />
+</Base>
