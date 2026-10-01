@@ -101,7 +101,7 @@ details[open] summary { margin-bottom: 8px; }
 .btn-solid:hover { background: var(--accent); color: var(--brand-ink); }
 .author-box { font-size: 0.92rem; color: var(--muted); border-top: 1px solid var(--line); margin-top: 32px; padding-top: 12px; }
 .sources { font-size: 0.92rem; }
-.sources h2 { font-size: 1.2rem; }
+.sources h2 { display: inline; font-size: 1.1rem; margin: 0; }
 .related { margin-top: 24px; }
 .muted { color: var(--muted); font-size: 0.92rem; }
 

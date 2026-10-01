@@ -5,9 +5,10 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<section class="sources" aria-labelledby="sources-h">
-  <h2 id="sources-h">Sources</h2>
+<!-- Collapsed for readers; the links stay in the HTML, so crawlers still see every source. -->
+<details class="sources">
+  <summary><h2 id="sources-h">Sources ({items.length})</h2></summary>
   <ol>
     {items.map((s) => <li><a href={s.url} rel="noopener">{s.title}</a></li>)}
   </ol>
-</section>
+</details>
