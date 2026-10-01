@@ -1,0 +1,159 @@
+---
+import Base from '../../layouts/Base.astro';
+import KeyFacts from '../../components/KeyFacts.astro';
+import Cta from '../../components/Cta.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+import Sources from '../../components/Sources.astro';
+import { site, rates } from '../../data/site';
+import { tours } from '../../data/tours';
+import { article } from '../../lib/schema';
+
+const base = Astro.site!;
+const path = '/guides/driver-vs-train/';
+const title = 'Private driver vs train vs tuk-tuk in Sri Lanka (2026)';
+const description =
+  'Cost, speed, comfort and luggage compared, plus the 2026 Kandy–Ella train status: trains run Nanu Oya → Ella, but the Kandy end is still closed.';
+const sedanEach = rates.sedan.perDay / 2;
+// Kandy → Ella by road, taken from the 7-day itinerary so the numbers match the tour pages.
+const [toNuwara, toElla] = ['Kandy → Nuwara Eliya', 'Nuwara Eliya → Ella'].map((r) => tours[0].plan.find((d) => d.route === r)!);
+const roadKm = toNuwara.km + toElla.km;
+const roadHours = parseFloat(toNuwara.hours) + parseFloat(toElla.hours);
+
+const sources = [
+  { title: 'Sunday Times (21 June 2026): Podi Menike runs again from Nanu Oya to Badulla', url: 'https://www.sundaytimes.lk/260621/news/podi-menike-hits-the-tracks-from-nanu-oya-to-badulla-marking-latest-phase-of-restoration-646913.html' },
+  { title: 'Newswire (8 Sept 2026): Nanu Oya–Great Western railway repairs to be completed by December', url: 'https://www.newswire.lk/2026/09/08/nanu-oya-great-western-railway-repairs-to-be-completed-by-december/' },
+  { title: 'The Morning (19 April 2026): Cyclone Ditwah: Upcountry rail repairs miss key targets', url: 'https://www.themorning.lk/articles/5hM6S1G0upunOodLALoX' },
+  { title: 'The Common Wanderer: Kandy to Ella train guide', url: 'https://thecommonwanderer.com/blog/kandy-to-ella-train-guide' },
+];
+---
+
+<Base
+  title={title}
+  description={description}
+  crumbs={[{ name: 'Driver vs train vs tuk-tuk', path }]}
+  schema={[article(base, { title, description, path, published: '2026-10-02', modified: site.lastUpdated })]}
+>
+  <h1>Private driver vs train vs tuk-tuk in Sri Lanka</h1>
+  <p class="lead">
+    For most trips of a week or more, a private driver is the easiest way to see Sri Lanka: US${rates.sedan.perDay} a day
+    for a sedan works out at US${sedanEach} each for two people, door to door. The train is cheaper and the hill-country
+    stretch is spectacular, but in 2026 it only runs from Nanu Oya to Ella. Tuk-tuks are for short trips in town.
+  </p>
+
+  <KeyFacts>
+    <ul>
+      <li>Private driver: US${rates.sedan.perDay} per day per sedan, US${sedanEach} per person for two, fuel and tolls included.</li>
+      <li>Kandy → Ella by road: about {roadKm} km and {roadHours} hours of driving via Nuwara Eliya. By train it normally takes 6–7 hours.</li>
+      <li>Since 20 June 2026 the hill-country train runs Nanu Oya → Ella → Badulla; the Kandy end of the line is still closed after Cyclone Ditwah.</li>
+      <li>Tuk-tuks suit short town trips; they are not allowed on the expressways.</li>
+      <li>Many travellers combine both: a driver for most days, the train for the Ella stretch.</li>
+    </ul>
+  </KeyFacts>
+
+  <h2>How do a driver, the train and a tuk-tuk compare?</h2>
+  <div class="table-wrap">
+    <table>
+      <caption>Driver costs are {site.name} rates; train timing is for normal service on the Kandy–Ella line.</caption>
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Private driver</th>
+          <th scope="col">Train</th>
+          <th scope="col">Tuk-tuk</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Cost</th>
+          <td>US${rates.sedan.perDay}/day per sedan, US${rates.van.perDay}/day per van; shared by the group</td>
+          <td>Cheapest per person</td>
+          <td>Agreed per ride; cheap for short hops</td>
+        </tr>
+        <tr>
+          <th scope="row">Speed</th>
+          <td>Door to door; Kandy → Ella about {roadHours} h</td>
+          <td>Slow; Kandy → Ella normally 6–7 h</td>
+          <td>Slow; not allowed on expressways</td>
+        </tr>
+        <tr>
+          <th scope="row">Comfort</th>
+          <td>Private, air-conditioned</td>
+          <td>Reserved seats are comfortable; unreserved carriages get crowded</td>
+          <td>Open-sided, no air conditioning</td>
+        </tr>
+        <tr>
+          <th scope="row">Luggage</th>
+          <td>Stays in the car all trip</td>
+          <td>You carry it on and off</td>
+          <td>Small bags only</td>
+        </tr>
+        <tr>
+          <th scope="row">Flexibility</th>
+          <td>Stop anywhere, change the route each day</td>
+          <td>Fixed timetable, stations only</td>
+          <td>Flexible within a town</td>
+        </tr>
+        <tr>
+          <th scope="row">Best for</th>
+          <td>Multi-stop trips, families, groups of 2+</td>
+          <td>The scenic hill-country stretch; solo budget travel</td>
+          <td>Getting around Kandy, Ella or Galle</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Is the Kandy to Ella train running in 2026?</h2>
+  <p>
+    Only part of the way. Cyclone Ditwah in late November 2025 damaged the Colombo–Badulla line in 223 places. The
+    section from Nanu Oya (near Nuwara Eliya) through Ella to Badulla reopened on 20 June 2026, when the Podi Menike
+    started running again. The Kandy end, from Rambukkana to Nanu Oya, is still suspended: repairs between Nanu Oya and
+    Great Western are targeted for December 2026, and the full line for the end of 2026. Earlier deadlines have slipped,
+    so check the status shortly before you travel.
+  </p>
+  <p>
+    What this means in practice: you cannot board at Kandy this year. Drive to Nanu Oya (or stay in Nuwara Eliya) and take
+    the train from there to Ella, which is the most photographed part of the route, including the Nine Arches Bridge
+    just outside Ella.
+  </p>
+
+  <blockquote>
+    <p>
+      “Most of my guests take the train for the Ella part. I drive their bags round and wait at the station, so they get the
+      views without carrying suitcases on and off the carriage.”
+    </p>
+    <footer>{site.driverQuoteName}</footer>
+  </blockquote>
+
+  <h2>When is the train the better choice?</h2>
+  <ul>
+    <li>You travel alone on a tight budget: one train ticket costs far less than a day of driver hire.</li>
+    <li>You want the scenic ride itself. The Nanu Oya → Ella stretch through tea estates is the reason most visitors take the train.</li>
+    <li>Your route follows the railway and you travel light.</li>
+  </ul>
+
+  <h2>Is it worth hiring a private driver in Sri Lanka?</h2>
+  <p>
+    For most first-time visitors on a 7–14 day trip, yes. Sigiriya, Dambulla, Polonnaruwa, Yala and the south coast are
+    not on one railway line, so a driver saves bus changes and lets you see two or three places a day. The cost falls with
+    group size: US${sedanEach} each per day for two in a sedan, or about US${Math.round(rates.van.perDay / 6)} each for six in a
+    van. It is less worth it if you travel solo on a budget, or stay in one or two places.
+  </p>
+  <p>
+    See the <a href="/tours/7-day-classic/">7-day itinerary with a private driver</a> for a route that combines the car and
+    the Ella train, and <a href="/pricing/">how much a private driver in Sri Lanka costs</a> for the full price breakdown.
+  </p>
+
+  <section class="related">
+    <h2>Related</h2>
+    <ul>
+      <li><a href="/pricing/">Private driver prices in Sri Lanka</a></li>
+      <li><a href="/tours/10-day-highlights/">10-day Sri Lanka itinerary with a private driver</a></li>
+      <li><a href="/guides/airport-transfers/">Colombo airport (CMB) transfers: times and prices</a></li>
+    </ul>
+  </section>
+
+  <Cta />
+  <AuthorBox />
+  <Sources items={sources} />
+</Base>
