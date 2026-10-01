@@ -7,5 +7,8 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://kurulu-drives.vercel.app',
   trailingSlash: 'always',
+  // Compression drops the space between text and an expression or link that starts a new
+  // source line ("or{price}" -> "orUS$85"). Vercel gzips responses anyway.
+  compressHTML: false,
   integrations: [sitemap({ filter: (page) => !page.includes('/404') })],
 });
