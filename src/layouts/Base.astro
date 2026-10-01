@@ -36,6 +36,8 @@ const tocHtml =
     : '';
 body = body.replace('<!--toc-->', tocHtml);
 
+// First URL segment, so every /tours/... page highlights "Tours" in the nav.
+const section = (path: string) => path.split('/')[1];
 const nav = [
   { href: '/pricing/', label: 'Prices' },
   { href: '/tours/7-day-classic/', label: 'Tours' },
@@ -77,7 +79,7 @@ const nav = [
         </a>
         <nav aria-label="Main">
           <ul>
-            {nav.map((n) => <li><a href={n.href} aria-current={Astro.url.pathname.startsWith(n.href) ? 'page' : undefined}>{n.label}</a></li>)}
+            {nav.map((n) => <li><a href={n.href} aria-current={section(Astro.url.pathname) === section(n.href) ? 'page' : undefined}>{n.label}</a></li>)}
           </ul>
         </nav>
       </div>
