@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# private planning notes (kept local)
+docs/HANDOFF.md
+docs/PLAN.md
