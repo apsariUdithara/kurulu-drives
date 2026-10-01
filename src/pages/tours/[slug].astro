@@ -4,7 +4,8 @@ import KeyFacts from '../../components/KeyFacts.astro';
 import Cta from '../../components/Cta.astro';
 import AuthorBox from '../../components/AuthorBox.astro';
 import Sources from '../../components/Sources.astro';
-import { rates, lkr } from '../../data/site';
+import Photo from '../../components/Photo.astro';
+import { site, rates, lkr } from '../../data/site';
 import { tours, totalKm, type Tour } from '../../data/tours';
 import { tourTrip } from '../../lib/schema';
 
@@ -37,10 +38,15 @@ const sources = [
   crumbs={[{ name: t.title, path }]}
   schema={[tourTrip(base, t, path)]}
 >
-  <h1>{t.title}</h1>
-  <p class="lead">
-    {t.summary} With a private driver it costs {usd(sedan)} by sedan or {usd(van)} by van for the whole trip.
-  </p>
+  <section class="hero">
+    <div>
+      <h1>{t.title}</h1>
+      <p class="lead">
+        {t.summary} With a private driver it costs {usd(sedan)} by sedan or {usd(van)} by van for the whole trip.
+      </p>
+    </div>
+    <Photo name={t.photo} eager />
+  </section>
 
   <KeyFacts>
     <ul>
@@ -51,6 +57,7 @@ const sources = [
       <li>Best for: {t.bestFor}</li>
     </ul>
   </KeyFacts>
+  <p><a class="btn btn-solid" href={`mailto:${site.email}?subject=${encodeURIComponent(`Quote: ${t.title}`)}`}>Get a quote for this trip</a></p>
 
   <h2>What is the day-by-day plan?</h2>
   <div class="table-wrap">
