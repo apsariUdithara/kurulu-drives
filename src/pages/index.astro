@@ -1,17 +1,108 @@
 ---
+import Base from '../layouts/Base.astro';
+import KeyFacts from '../components/KeyFacts.astro';
+import Cta from '../components/Cta.astro';
+import { site, rates, lkr, transfers } from '../data/site';
+import { tours, totalKm } from '../data/tours';
+import { organization, website } from '../lib/schema';
 
+const base = Astro.site!;
+const byPrice = [...transfers].sort((a, b) => a.sedan - b.sedan);
+const [cheapest, priciest] = [byPrice[0], byPrice.at(-1)!];
+const places = [...new Set(tours.flatMap((t) => t.places))];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base
+  title={`${site.name}: private drivers & tours in Sri Lanka`}
+  description={`Private chauffeur-guides from Kandy: A/C sedan US$${rates.sedan.perDay}/day, van US$${rates.van.perDay}/day, all-inclusive. 7, 10 and 14-day round trips and Colombo airport transfers.`}
+  schema={[organization(base), website(base)]}
+>
+  <section class="hero">
+    <div>
+      <h1>Private drivers & tours across Sri Lanka, from Kandy</h1>
+      <p class="lead">
+        {site.name} is a private driver and tour service based in Kandy, Sri Lanka. An English-speaking chauffeur-guide drives
+        you around the island in an air-conditioned sedan (US${rates.sedan.perDay}/day) or van (US${rates.van.perDay}/day),
+        with fuel, tolls and the driver's meals and room included.
+      </p>
+      <a class="btn btn-solid" href="/pricing/">See prices and what's included</a>
+    </div>
+    <svg class="hero-art" viewBox="0 0 400 260" aria-hidden="true">
+      <rect width="400" height="260" fill="#e8f1ef" />
+      <circle cx="310" cy="70" r="28" fill="#f3c78a" />
+      <path d="M0 170 Q80 90 170 150 T400 120 V260 H0Z" fill="#5f9c95" />
+      <path d="M0 210 Q120 150 230 200 T400 180 V260 H0Z" fill="#0e5a5e" />
+      <path d="M60 260 Q150 210 220 225 T360 190" stroke="#f3c78a" stroke-width="6" fill="none" stroke-linecap="round" />
+    </svg>
+  </section>
+
+  <KeyFacts>
+    <ul>
+      <li>Day rates: {rates.sedan.label} US${rates.sedan.perDay} ({lkr(rates.sedan.perDay)}); {rates.van.label} US${rates.van.perDay} ({lkr(rates.van.perDay)}).</li>
+      <li>Included: fuel, highway tolls, parking, the driver's meals and room. Not included: your hotels and entrance tickets.</li>
+      <li>Coverage: all of Sri Lanka from a base in {site.address.locality}, with pickups at Colombo airport (CMB / Bandaranaike International).</li>
+      <li>Ready-made itineraries of {tours.map((t) => t.days).join(', ')} days, or a custom route.</li>
+      <li>Prices are indicative 2026 rates.</li>
+    </ul>
+  </KeyFacts>
+
+  <h2>What does {site.name} offer?</h2>
+  <div class="cards">
+    <article class="card">
+      <h3><a href="/tours/7-day-classic/">Multi-day round trips</a></h3>
+      <p>The same driver-guide stays with you for the whole trip, usually 7 to 14 days, and plans each day's drive around your stops.</p>
+      <p class="price">US${rates.sedan.perDay}–{rates.van.perDay} per day</p>
+    </article>
+    <article class="card">
+      <h3><a href="/guides/airport-transfers/">Colombo airport (CMB) transfers</a></h3>
+      <p>Your driver meets you in the arrivals hall and drives you straight to your first hotel, at a fixed one-way price.</p>
+      <p class="price">From US${cheapest.sedan} ({cheapest.to}) to US${priciest.sedan} ({priciest.to}) by sedan</p>
+    </article>
+    <article class="card">
+      <h3><a href="/pricing/">Day trips from Kandy</a></h3>
+      <p>Temple of the Tooth and Peradeniya gardens, the tea country around Nuwara Eliya, or Sigiriya and Dambulla in one long day.</p>
+      <p class="price">Same day rate: US${rates.sedan.perDay} by sedan</p>
+    </article>
+  </div>
+
+  <h2>Which Sri Lanka itineraries can you book with a driver?</h2>
+  <div class="cards">
+    {tours.map((t) => (
+      <article class="card">
+        <h3><a href={`/tours/${t.slug}/`}>{t.title}</a></h3>
+        <p>{t.bestFor}</p>
+        <p class="muted">{t.days} days · about {totalKm(t).toLocaleString('en-US')} km · {t.places.join(', ')}</p>
+        <p class="price">From US${(t.days * rates.sedan.perDay).toLocaleString('en-US')} by sedan</p>
+      </article>
+    ))}
+  </div>
+
+  <h2>Why do travellers hire a private driver in Sri Lanka?</h2>
+  <ul>
+    <li>
+      <strong>The sights are spread out.</strong> Sigiriya, Dambulla, Polonnaruwa and Yala are not on the railway, so reaching
+      them by public transport means bus changes and long waits.
+    </li>
+    <li>
+      <strong>One fixed price.</strong> Fuel, tolls and the driver's food and room are in the day rate, so a
+      {tours[0].days}-day trip costs US${(tours[0].days * rates.sedan.perDay).toLocaleString('en-US')} by sedan before hotels and tickets.
+    </li>
+    <li>
+      <strong>Door to door, with luggage.</strong> You stop where you want: a tea factory, a spice garden, a roadside fruit stall.
+    </li>
+    <li>
+      <strong>The train is still worth it for one leg.</strong> Many travellers take the hill-country train to Ella while the
+      driver takes the bags by road. See <a href="/guides/driver-vs-train/">private driver vs train vs tuk-tuk</a> for the
+      2026 rail status and costs.
+    </li>
+  </ul>
+
+  <h2>Which places do we cover?</h2>
+  <p>
+    All of Sri Lanka. Our itineraries include {places.join(', ')}, plus airport transfers to Colombo, Negombo and the south
+    coast. Not sure what to pay? Read <a href="/pricing/">how much a private driver in Sri Lanka costs</a> and
+    <a href="/guides/tipping-and-driver-costs/">tipping and driver costs</a>.
+  </p>
+
+  <Cta />
+</Base>
