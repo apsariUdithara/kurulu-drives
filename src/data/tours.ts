@@ -1,5 +1,6 @@
 // Itineraries. Distances and drive times are approximate road figures;
 // "km: 0" means a sightseeing day without a long transfer.
+import type { PhotoKey } from './photos';
 
 export type Day = { route: string; km: number; hours: string; highlights: string; overnight: string };
 export type Tour = {
@@ -8,6 +9,7 @@ export type Tour = {
   title: string;
   summary: string;
   bestFor: string;
+  photo: PhotoKey;
   places: string[];
   plan: Day[];
 };
@@ -15,6 +17,7 @@ export type Tour = {
 export const tours: Tour[] = [
   {
     slug: '7-day-classic',
+    photo: 'sigiriya',
     days: 7,
     title: '7-day Sri Lanka itinerary with a private driver',
     summary:
@@ -33,6 +36,7 @@ export const tours: Tour[] = [
   },
   {
     slug: '10-day-highlights',
+    photo: 'elephants',
     days: 10,
     title: '10-day Sri Lanka itinerary with a private driver',
     summary:
@@ -54,6 +58,7 @@ export const tours: Tour[] = [
   },
   {
     slug: '14-day-grand-tour',
+    photo: 'nineArches',
     days: 14,
     title: '14-day Sri Lanka round trip by car with a private driver',
     summary:

@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import KeyFacts from '../components/KeyFacts.astro';
 import Cta from '../components/Cta.astro';
+import Photo from '../components/Photo.astro';
 import { site, rates, lkr, transfers } from '../data/site';
 import { tours, totalKm } from '../data/tours';
 import { organization, website } from '../lib/schema';
@@ -25,15 +26,12 @@ const places = [...new Set(tours.flatMap((t) => t.places))];
         you around the island in an air-conditioned sedan (US${rates.sedan.perDay}/day) or van (US${rates.van.perDay}/day),
         with fuel, tolls and the driver's meals and room included.
       </p>
-      <a class="btn btn-solid" href="/pricing/">See prices and what's included</a>
+      <p class="hero-buttons">
+        <a class="btn btn-solid" href="/pricing/">See prices</a>
+        <a class="btn btn-outline" href={`mailto:${site.email}?subject=Trip%20quote`}>Get a quote</a>
+      </p>
     </div>
-    <svg class="hero-art" viewBox="0 0 400 260" aria-hidden="true">
-      <rect width="400" height="260" fill="#e8f1ef" />
-      <circle cx="310" cy="70" r="28" fill="#f3c78a" />
-      <path d="M0 170 Q80 90 170 150 T400 120 V260 H0Z" fill="#5f9c95" />
-      <path d="M0 210 Q120 150 230 200 T400 180 V260 H0Z" fill="#0e5a5e" />
-      <path d="M60 260 Q150 210 220 225 T360 190" stroke="#f3c78a" stroke-width="6" fill="none" stroke-linecap="round" />
-    </svg>
+    <Photo name="tea" eager />
   </section>
 
   <KeyFacts>
@@ -69,6 +67,7 @@ const places = [...new Set(tours.flatMap((t) => t.places))];
   <div class="cards">
     {tours.map((t) => (
       <article class="card">
+        <Photo name={t.photo} sizes="(min-width: 820px) 340px, 100vw" />
         <h3><a href={`/tours/${t.slug}/`}>{t.title}</a></h3>
         <p>{t.bestFor}</p>
         <p class="muted">{t.days} days · about {totalKm(t).toLocaleString('en-US')} km · {t.places.join(', ')}</p>
