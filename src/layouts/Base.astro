@@ -15,6 +15,27 @@ const base = Astro.site!;
 const canonical = new URL(Astro.url.pathname, base).href;
 const trail = [{ name: 'Home', path: '/' }, ...crumbs];
 const ld = crumbs.length ? [...schema, breadcrumbs(base, trail)] : schema;
+
+// "On this page" links: on inner pages, every question-style <h2> gets an id and a link,
+// shown above the first one. Pages with fewer than 3 such headings get no list.
+const toc: { id: string; label: string }[] = [];
+let body = await Astro.slots.render('default');
+if (crumbs.length) {
+  body = body.replace(/<h2([^>]*)>([^<]*\?)<\/h2>/g, (match, attrs: string, label: string) => {
+    if (attrs.includes('id=')) return match;
+    const id = label.toLowerCase().replace(/&[^;]+;/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    toc.push({ id, label });
+    return `${toc.length === 1 ? '<!--toc-->' : ''}<h2${attrs} id="${id}">${label}</h2>`;
+  });
+}
+const tocHtml =
+  toc.length >= 3
+    ? `<nav class="toc" aria-label="On this page"><p class="kf-title">On this page</p><ol>${toc
+        .map((t) => `<li><a href="#${t.id}">${t.label}</a></li>`)
+        .join('')}</ol></nav>`
+    : '';
+body = body.replace('<!--toc-->', tocHtml);
+
 const nav = [
   { href: '/pricing/', label: 'Prices' },
   { href: '/tours/7-day-classic/', label: 'Tours' },
@@ -73,7 +94,7 @@ const nav = [
     )}
 
     <main id="main" class="wrap">
-      <slot />
+      <Fragment set:html={body} />
     </main>
 
     <footer class="site-footer">
