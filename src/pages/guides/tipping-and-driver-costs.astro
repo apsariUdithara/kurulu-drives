@@ -1,0 +1,136 @@
+---
+import Base from '../../layouts/Base.astro';
+import KeyFacts from '../../components/KeyFacts.astro';
+import Cta from '../../components/Cta.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+import Sources from '../../components/Sources.astro';
+import { site, rates, lkr } from '../../data/site';
+import { tours } from '../../data/tours';
+import { article } from '../../lib/schema';
+
+const base = Astro.site!;
+const path = '/guides/tipping-and-driver-costs/';
+const fmt = (n: number) => n.toLocaleString('en-US');
+const toUsd = (lkrAmount: number) => Math.round(lkrAmount / site.usdToLkr);
+// Our suggested daily tip in LKR: between the low and high published guidance.
+const tip = { low: 1500, high: 3000 };
+const week = tours[0].days;
+const title = 'Tipping and driver costs in Sri Lanka (2026)';
+const description = `How much to tip a driver in Sri Lanka (we suggest LKR ${fmt(tip.low)}–${fmt(tip.high)} a day), who pays for the driver's food and room, and a hidden-cost checklist.`;
+
+const sources = [
+  { title: 'The Middle Age Wanderer: Tipping in Sri Lanka, your complete guide in 2026 (24 January 2026)', url: 'https://themiddleagewanderer.com/guide-to-tipping-in-sri-lanka/' },
+  { title: 'Rediscover Sri Lanka: Tipping in Sri Lanka 2026 (15 June 2026)', url: 'https://rediscoversrilanka.com/tipping-in-sri-lanka-guide/' },
+  { title: 'Ceylon Route: Hire a private driver in Sri Lanka, cost in 2026', url: 'https://ceylonroute.com/blog/hire-private-driver-sri-lanka-cost-2026/' },
+  { title: 'Central Bank of Sri Lanka: exchange rates', url: 'https://www.cbsl.gov.lk/en/rates-and-indicators/exchange-rates' },
+];
+---
+
+<Base
+  title={title}
+  description={description}
+  crumbs={[{ name: 'Tipping & driver costs', path }]}
+  schema={[article(base, { title, description, path, published: '2026-10-02', modified: site.lastUpdated })]}
+>
+  <h1>Tipping and driver costs in Sri Lanka</h1>
+  <p class="lead">
+    Tipping a private driver in Sri Lanka is customary but optional. Published guidance ranges from LKR 500 to US$20 a
+    day; we suggest LKR {fmt(tip.low)}–{fmt(tip.high)} (about US${toUsd(tip.low)}–{toUsd(tip.high)}) per day for good
+    service, given in rupees at the end of the trip. With {site.name} you do not pay for the driver's food or room: both are
+    in the day rate.
+  </p>
+
+  <KeyFacts>
+    <ul>
+      <li>Suggested driver tip: LKR {fmt(tip.low)}–{fmt(tip.high)} per day, about US${toUsd(tip.low)}–{toUsd(tip.high)}.</li>
+      <li>For a {week}-day trip that is LKR {fmt(tip.low * week)}–{fmt(tip.high * week)} in total.</li>
+      <li>Give it at the end of the trip, in rupees, in an envelope.</li>
+      <li>The driver's meals and accommodation are included in our US${rates.sedan.perDay}/day sedan rate.</li>
+      <li>Many restaurants add a 10% service charge; tip only where they do not.</li>
+    </ul>
+  </KeyFacts>
+
+  <h2>How much should I tip a driver in Sri Lanka?</h2>
+  <p>
+    Sources disagree by a factor of about seven, so here are the published figures next to our suggestion. The lower figure comes
+    from a traveller's guide; the higher one from a tour operator's guide aimed at chauffeur-guided trips.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <caption>US$ and LKR conversions at about {site.usdToLkr} LKR per US$.</caption>
+      <thead>
+        <tr><th scope="col">Source</th><th scope="col" class="num">Per day (as published)</th><th scope="col" class="num">Converted</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">The Middle Age Wanderer (January 2026)</th><td class="num">LKR 500–1,000</td><td class="num">about US$1.50–3</td></tr>
+        <tr><th scope="row">Rediscover Sri Lanka (June 2026)</th><td class="num">US$10–20</td><td class="num">{lkr(10)}–{fmt(20 * site.usdToLkr)}</td></tr>
+        <tr><th scope="row">Our suggestion</th><td class="num">LKR {fmt(tip.low)}–{fmt(tip.high)}</td><td class="num">about US${toUsd(tip.low)}–{toUsd(tip.high)}</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Tip towards the top of the range if the driver went out of their way: early starts for Sigiriya at sunrise, help with
+    a sick child, or a route change at short notice. Rupees are easier for the driver to use than foreign notes.
+  </p>
+
+  <blockquote>
+    <p>
+      “Guests often ask me how much to tip. I tell them it is never required: the day rate already pays me and covers my room
+      and food. If you want to, rupees in an envelope on the last day is the usual way.”
+    </p>
+    <footer>{site.driverQuoteName}</footer>
+  </blockquote>
+
+  <h2>Do I pay for my driver's food and accommodation?</h2>
+  <p>
+    Not with us: the driver's meals and room are part of the day rate. That is the norm in Sri Lanka, as 2026 driver-hire
+    guides note, but not every quote includes it, so ask. Many hotels on the tourist route have separate rooms for drivers;
+    where a hotel does not, we arrange and pay for a room nearby. If you invite your driver to eat with you, that is your
+    choice, not an expectation.
+  </p>
+
+  <h2>Who else should I tip in Sri Lanka?</h2>
+  <div class="table-wrap">
+    <table>
+      <caption>Figures from The Middle Age Wanderer (January 2026). Tip in rupees.</caption>
+      <thead>
+        <tr><th scope="col">Who</th><th scope="col" class="num">Typical tip</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Guide at a site, half day</th><td class="num">LKR 500–1,000</td></tr>
+        <tr><th scope="row">Guide at a site, full day</th><td class="num">up to LKR 2,000</td></tr>
+        <tr><th scope="row">Safari jeep driver or guide</th><td class="num">LKR 1,000–2,500 per person per day</td></tr>
+        <tr><th scope="row">Hotel housekeeping</th><td class="num">LKR 200–300 per day</td></tr>
+        <tr><th scope="row">Hotel porter</th><td class="num">LKR 200–300 per bag</td></tr>
+        <tr><th scope="row">Restaurant without a service charge</th><td class="num">5–10% of the bill</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>What hidden costs should I check before hiring a driver?</h2>
+  <ul>
+    <li><strong>Per vehicle or per person?</strong> Our rates are per vehicle; some quotes are per person.</li>
+    <li><strong>Fuel, tolls and parking:</strong> included, or added at the end?</li>
+    <li><strong>Driver's room and meals:</strong> included, or paid by you each night?</li>
+    <li><strong>Airport waiting:</strong> is there a charge if your flight is late?</li>
+    <li><strong>Shopping stops:</strong> some spice gardens and gem shops pay drivers commission. Say if you would rather skip them.</li>
+    <li><strong>What is not included:</strong> entrance tickets, safari jeeps and train tickets are extra with every driver.</li>
+  </ul>
+  <p>
+    Our full breakdown is on <a href="/pricing/">how much a private driver in Sri Lanka costs</a>. For a sample trip with
+    costs per day, see the <a href="/tours/7-day-classic/">7-day itinerary with a private driver</a>.
+  </p>
+
+  <section class="related">
+    <h2>Related</h2>
+    <ul>
+      <li><a href="/pricing/">Private driver prices in Sri Lanka</a></li>
+      <li><a href="/guides/driver-vs-train/">Private driver vs train vs tuk-tuk in Sri Lanka</a></li>
+      <li><a href="/faq/">Frequently asked questions about hiring a driver</a></li>
+    </ul>
+  </section>
+
+  <Cta />
+  <AuthorBox />
+  <Sources items={sources} />
+</Base>
