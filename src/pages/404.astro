@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import { tours } from '../data/tours';
+---
+
+<Base title="Page not found | Kurulu Drives" description="This page does not exist. Find private driver prices, Sri Lanka itineraries and travel guides from Kurulu Drives.">
+  <h1>Page not found</h1>
+  <p class="lead">This page does not exist or has moved. These pages answer most questions about hiring a driver in Sri Lanka:</p>
+  <ul>
+    <li><a href="/">Home: private drivers and tours across Sri Lanka</a></li>
+    <li><a href="/pricing/">How much a private driver in Sri Lanka costs</a></li>
+    {tours.map((t) => <li><a href={`/tours/${t.slug}/`}>{t.title}</a></li>)}
+    <li><a href="/guides/driver-vs-train/">Private driver vs train vs tuk-tuk</a></li>
+    <li><a href="/guides/airport-transfers/">Colombo airport (CMB) transfers</a></li>
+    <li><a href="/guides/tipping-and-driver-costs/">Tipping and driver costs</a></li>
+    <li><a href="/faq/">FAQ</a></li>
+    <li><a href="/about/">About Kurulu Drives</a></li>
+  </ul>
+</Base>
