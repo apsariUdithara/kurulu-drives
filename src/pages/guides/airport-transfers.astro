@@ -1,0 +1,127 @@
+---
+import Base from '../../layouts/Base.astro';
+import KeyFacts from '../../components/KeyFacts.astro';
+import Cta from '../../components/Cta.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+import Sources from '../../components/Sources.astro';
+import { site, lkr, transfers } from '../../data/site';
+import { article } from '../../lib/schema';
+
+const base = Astro.site!;
+const path = '/guides/airport-transfers/';
+const to = (place: string) => transfers.find((t) => t.to === place)!;
+const [kandy, ella, negombo] = ['Kandy', 'Ella', 'Negombo'].map(to);
+const prices = (k: 'sedan' | 'van') => transfers.map((t) => t[k]);
+const range = (k: 'sedan' | 'van') => `US$${Math.min(...prices(k))}–${Math.max(...prices(k))}`;
+const title = 'Colombo Airport (CMB) transfers: times and prices';
+const description = `One-way transfers from Colombo airport (CMB): Kandy ${kandy.km} km, ${kandy.time}, US$${kandy.sedan} by sedan. Times, distances and prices to ${transfers.length} destinations.`;
+
+const sources = [
+  { title: 'Rome2Rio: Colombo airport (CMB) to Kandy', url: 'https://www.rome2rio.com/s/Colombo-Airport-CMB/Kandy' },
+  { title: 'Mirissa Cabs: Colombo airport to Galle', url: 'https://mirissacabs.com/colombo-airport-to-galle/' },
+  { title: 'Welcome Pickups: Colombo airport to Sigiriya', url: 'https://www.welcomepickups.com/colombo/airport-to-sigiriya/' },
+  { title: 'The Morning (19 April 2026): Cyclone Ditwah: Upcountry rail repairs miss key targets', url: 'https://www.themorning.lk/articles/5hM6S1G0upunOodLALoX' },
+  { title: 'Central Bank of Sri Lanka: exchange rates', url: 'https://www.cbsl.gov.lk/en/rates-and-indicators/exchange-rates' },
+];
+---
+
+<Base
+  title={title}
+  description={description}
+  crumbs={[{ name: 'Airport transfers', path }]}
+  schema={[article(base, { title, description, path, published: '2026-10-02', modified: site.lastUpdated })]}
+>
+  <h1>Colombo Airport (CMB) transfers: times and prices</h1>
+  <p class="lead">
+    A private transfer from Colombo airport (CMB / Bandaranaike International) to Kandy covers about {kandy.km} km and
+    takes {kandy.time}; with {site.name} it costs US${kandy.sedan} by sedan or US${kandy.van} by van. The table below gives
+    fixed one-way prices from the airport to {transfers.length} common first stops.
+  </p>
+
+  <KeyFacts>
+    <ul>
+      <li>One-way from CMB: {range('sedan')} by sedan, {range('van')} by van, depending on distance.</li>
+      <li>CMB → Kandy: about {kandy.km} km, {kandy.time}, US${kandy.sedan} ({lkr(kandy.sedan)}) by sedan.</li>
+      <li>CMB → Ella is the longest common transfer: about {ella.km} km and {ella.time}.</li>
+      <li>Prices are per vehicle, not per person, and include tolls, parking and waiting for a delayed flight.</li>
+    </ul>
+  </KeyFacts>
+
+  <h2>How long does it take, and how much does it cost, from Colombo airport?</h2>
+  <div class="table-wrap">
+    <table>
+      <caption>One-way, per vehicle. Sedan for 1–3 travellers, van for 4–8. Times are typical door to door and vary with traffic.</caption>
+      <thead>
+        <tr>
+          <th scope="col">From CMB to</th>
+          <th scope="col" class="num">Distance</th>
+          <th scope="col" class="num">Time</th>
+          <th scope="col" class="num">Sedan</th>
+          <th scope="col" class="num">Van</th>
+        </tr>
+      </thead>
+      <tbody>
+        {transfers.map((t) => (
+          <tr>
+            <th scope="row">{t.to}</th>
+            <td class="num">~{t.km} km</td>
+            <td class="num">{t.time}</td>
+            <td class="num">US${t.sedan}<br /><span class="muted">{lkr(t.sedan)}</span></td>
+            <td class="num">US${t.van}<br /><span class="muted">{lkr(t.van)}</span></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>How do I get from Colombo airport to Kandy?</h2>
+  <p>
+    By road it is about {kandy.km} km, usually {kandy.time} on the A1 via Warakapola and Kegalle. A private transfer
+    costs US${kandy.sedan} by sedan. The train is not an option at the moment: the railway was still suspended between
+    Rambukkana and Kandy at our last check, after damage from Cyclone Ditwah. If you land late at night, consider staying
+    the first night in Negombo, about {negombo.time} from the airport, and driving to Kandy after breakfast.
+  </p>
+
+  <h2>How much is a taxi from Colombo airport to Ella?</h2>
+  <p>
+    Ella is about {ella.km} km from the airport, a {ella.time} drive. Our fixed price is US${ella.sedan} ({lkr(ella.sedan)})
+    by sedan or US${ella.van} by van; other operators quote around LKR 27,000–35,000 by car. Many travellers break the
+    journey with a night in Kandy or Nuwara Eliya, which also lets them take the scenic train from Nanu Oya to Ella. See
+    the <a href="/tours/7-day-classic/">7-day itinerary with a private driver</a> for that route.
+  </p>
+
+  <h2>How do these prices compare with other airport transfers?</h2>
+  <p>
+    Published 2026 prices from other operators are similar: about US$55 by car and US$80 by van to Galle, around US$65 to
+    Sigiriya, and US$40–70 to Mirissa. Check that a quote is per vehicle and includes expressway tolls and waiting time.
+  </p>
+
+  <h2>What happens when I land?</h2>
+  <ul>
+    <li>Your driver waits outside the arrivals exit holding a board with your name.</li>
+    <li>We track your flight number, so a delay does not cost extra and the driver adjusts to the new landing time.</li>
+    <li>Withdraw some rupees at an ATM in the arrivals hall for tips and small purchases on the way.</li>
+    <li>Child seats are available on request; mention the children's ages when you book.</li>
+  </ul>
+
+  <blockquote>
+    <p>
+      “If your flight lands after dark, stay the first night in Negombo. It is twenty minutes from the airport, and the drive
+      to Kandy is much easier after a night's sleep and breakfast.”
+    </p>
+    <footer>{site.driverQuoteName}</footer>
+  </blockquote>
+
+  <section class="related">
+    <h2>Related</h2>
+    <ul>
+      <li><a href="/pricing/">How much a private driver in Sri Lanka costs per day</a></li>
+      <li><a href="/tours/10-day-highlights/">10-day Sri Lanka itinerary with a private driver</a></li>
+      <li><a href="/guides/driver-vs-train/">Private driver vs train vs tuk-tuk in Sri Lanka</a></li>
+    </ul>
+  </section>
+
+  <Cta text="Send your flight number, arrival time and group size and we will confirm a fixed transfer price within 24 hours." />
+  <AuthorBox />
+  <Sources items={sources} />
+</Base>
