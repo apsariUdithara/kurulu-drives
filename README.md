@@ -2,7 +2,7 @@
 
 A demo website for a private driver and tour service in Sri Lanka, built to show **AI Search Optimisation (AISO)**: making a business easy for ChatGPT, Perplexity, Gemini, Copilot and Google's AI features to find, quote and cite.
 
-**Live site:** https://kurulu-drives.vercel.app · **AISO report:** [docs/AISO-REPORT.md](docs/AISO-REPORT.md)
+**Live site:** https://kurulu-drives.vercel.app · **AISO report:** [docs/AISO-REPORT.pdf](docs/AISO-REPORT.pdf)
 
 [![Kurulu Drives home page: private drivers and tours across Sri Lanka, with day rates and a tea estate photo](docs/screenshots/home.png)](https://kurulu-drives.vercel.app)
 
