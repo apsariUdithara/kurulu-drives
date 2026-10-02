@@ -130,3 +130,15 @@ details[open] summary { margin-bottom: 8px; }
 .site-footer ul { list-style: none; padding: 0; margin: 0; }
 .brand-foot { font: 700 1.2rem var(--serif); margin: 0 0 6px; }
 .foot-head { font-weight: 700; margin: 0 0 6px; }
+
+/* Phones: a "Get a quote" button that stays on screen while reading long pages. */
+.quote-bar { display: none; }
+@media (max-width: 640px) {
+  .quote-bar {
+    display: block; position: fixed; left: 16px; right: 16px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 20;
+    padding: 12px; border-radius: 999px; background: var(--brand); color: var(--brand-ink);
+    text-align: center; font-weight: 700; text-decoration: none; box-shadow: 0 4px 14px rgb(0 0 0 / 0.2);
+  }
+  .quote-bar:hover { color: var(--brand-ink); background: var(--accent); }
+  body { padding-bottom: 76px; }
+}
