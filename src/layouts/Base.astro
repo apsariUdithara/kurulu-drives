@@ -2,17 +2,20 @@
 import '../styles/global.css';
 import { site } from '../data/site';
 import { breadcrumbs } from '../lib/schema';
+import { photos, type PhotoKey } from '../data/photos';
 
 interface Props {
   title: string;
   description: string;
   crumbs?: { name: string; path: string }[]; // excluding Home
   schema?: object[];
+  image?: PhotoKey; // share image (og:image), 1200x630 JPG in public/images/og-<file>.jpg
 }
 
-const { title, description, crumbs = [], schema = [] } = Astro.props;
+const { title, description, crumbs = [], schema = [], image = 'tea' } = Astro.props;
 const base = Astro.site!;
 const canonical = new URL(Astro.url.pathname, base).href;
+const ogImage = new URL(`/images/og-${photos[image].file}.jpg`, base).href;
 const trail = [{ name: 'Home', path: '/' }, ...crumbs];
 const ld = crumbs.length ? [...schema, breadcrumbs(base, trail)] : schema;
 
@@ -62,7 +65,12 @@ const nav = [
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={photos[image].alt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
     {site.googleVerification && <meta name="google-site-verification" content={site.googleVerification} />}
     {site.bingVerification && <meta name="msvalidate.01" content={site.bingVerification} />}
     {ld.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
