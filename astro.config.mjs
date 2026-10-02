@@ -10,5 +10,7 @@ export default defineConfig({
   // Compression drops the space between text and an expression or link that starts a new
   // source line ("or{price}" -> "orUS$85"). Vercel gzips responses anyway.
   compressHTML: false,
+  // The stylesheet is ~2 KB gzipped: inlining it saves a render-blocking request.
+  build: { inlineStylesheets: 'always' },
   integrations: [sitemap({ filter: (page) => !page.includes('/404') })],
 });
