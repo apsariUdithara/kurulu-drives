@@ -1,4 +1,4 @@
-; ChatGPT credited the brand with another company's reviews # Kurulu Drives
+# Kurulu Drives
 
 A demo website for a private driver and tour service in Sri Lanka, built to show **AI Search Optimisation (AISO)**: making a business easy for ChatGPT, Perplexity, Gemini, Copilot and Google's AI features to find, quote and cite.
 
