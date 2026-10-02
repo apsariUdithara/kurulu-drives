@@ -5,6 +5,7 @@ import Cta from '../components/Cta.astro';
 import AuthorBox from '../components/AuthorBox.astro';
 import { site, rates, transfers } from '../data/site';
 import { tours } from '../data/tours';
+import { photos } from '../data/photos';
 import { organization } from '../lib/schema';
 
 const base = Astro.site!;
@@ -96,6 +97,12 @@ const fromAirport = transfers.find((t) => t.to === 'Kandy')!;
       </tbody>
     </table>
   </div>
+
+  <h2>Where are the photos from?</h2>
+  <p>All photos on this site are from Unsplash, used under the Unsplash License. With thanks to:</p>
+  <ul>
+    {Object.values(photos).map((p) => <li>{p.alt}: <a href={p.url} rel="noopener">{p.by}</a></li>)}
+  </ul>
 
   <Cta />
   <AuthorBox />

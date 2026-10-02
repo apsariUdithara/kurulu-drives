@@ -1,5 +1,5 @@
 // Photos from Unsplash (free under the Unsplash License), stored in public/images/ as
-// <file>-640.webp and <file>-1200.webp, cropped to 3:2. Credits are shown under each photo.
+// <file>-640.webp and <file>-1200.webp, cropped to 3:2. Credited on the About page.
 export const photos = {
   tea: {
     file: 'tea-nuwara-eliya',

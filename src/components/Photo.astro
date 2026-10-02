@@ -1,4 +1,5 @@
 ---
+// Credits are listed once on the About page, not under each photo.
 import { photos, type PhotoKey } from '../data/photos';
 
 interface Props {
@@ -24,5 +25,4 @@ const src = (w: number) => `/images/${p.file}-${w}.webp`;
     fetchpriority={eager ? 'high' : undefined}
     decoding="async"
   />
-  <figcaption>Photo: <a href={p.url} rel="noopener">{p.by}</a> / Unsplash</figcaption>
 </figure>

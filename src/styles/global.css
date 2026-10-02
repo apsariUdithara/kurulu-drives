@@ -55,11 +55,8 @@ main { padding-bottom: 48px; }
 .photo { margin: 0; }
 main > .photo { max-width: 720px; margin: 20px 0; }
 .photo img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius); }
-.photo figcaption { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
-.photo figcaption a { color: inherit; }
 .card .photo { margin: -18px -20px 12px; }
 .card .photo img { border-radius: var(--radius) var(--radius) 0 0; }
-.card .photo figcaption { padding: 0 20px; }
 
 /* Boxes */
 .key-facts { background: var(--tint); border-left: 4px solid var(--brand); border-radius: var(--radius); padding: 14px 20px; margin: 20px 0; }
