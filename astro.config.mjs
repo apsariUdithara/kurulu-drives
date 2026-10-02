@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { site } from './src/data/site.ts';
 
 // Change `site` to the real Vercel URL after the first deploy; canonical URLs,
 // sitemap, robots.txt, llms.txt and JSON-LD all derive from it.
@@ -12,5 +13,6 @@ export default defineConfig({
   compressHTML: false,
   // The stylesheet is ~2 KB gzipped: inlining it saves a render-blocking request.
   build: { inlineStylesheets: 'always' },
-  integrations: [sitemap({ filter: (page) => !page.includes('/404') })],
+  // lastmod uses the site-wide "last updated" date shown on every page.
+  integrations: [sitemap({ filter: (page) => !page.includes('/404'), lastmod: new Date(site.lastUpdated) })],
 });
