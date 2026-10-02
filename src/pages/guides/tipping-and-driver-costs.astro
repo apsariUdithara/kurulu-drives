@@ -56,15 +56,15 @@ const sources = [
     from a traveller's guide; the higher one from a tour operator's guide aimed at chauffeur-guided trips.
   </p>
   <div class="table-wrap">
-    <table>
+    <table class="stack">
       <caption>US$ and LKR conversions at about {site.usdToLkr} LKR per US$.</caption>
       <thead>
         <tr><th scope="col">Source</th><th scope="col" class="num">Per day (as published)</th><th scope="col" class="num">Converted</th></tr>
       </thead>
       <tbody>
-        <tr><th scope="row">The Middle Age Wanderer (January 2026)</th><td class="num">LKR 500–1,000</td><td class="num">about US$1.50–3</td></tr>
-        <tr><th scope="row">Rediscover Sri Lanka (June 2026)</th><td class="num">US$10–20</td><td class="num">{lkr(10)}–{fmt(20 * site.usdToLkr)}</td></tr>
-        <tr><th scope="row">Our suggestion</th><td class="num">LKR {fmt(tip.low)}–{fmt(tip.high)}</td><td class="num">about US${toUsd(tip.low)}–{toUsd(tip.high)}</td></tr>
+        <tr><th scope="row">The Middle Age Wanderer (January 2026)</th><td class="num" data-label="Per day (as published)">LKR 500–1,000</td><td class="num" data-label="Converted">about US$1.50–3</td></tr>
+        <tr><th scope="row">Rediscover Sri Lanka (June 2026)</th><td class="num" data-label="Per day (as published)">US$10–20</td><td class="num" data-label="Converted">{lkr(10)}–{fmt(20 * site.usdToLkr)}</td></tr>
+        <tr><th scope="row">Our suggestion</th><td class="num" data-label="Per day (as published)">LKR {fmt(tip.low)}–{fmt(tip.high)}</td><td class="num" data-label="Converted">about US${toUsd(tip.low)}–{toUsd(tip.high)}</td></tr>
       </tbody>
     </table>
   </div>
@@ -94,15 +94,15 @@ const sources = [
     <table>
       <caption>Figures from The Middle Age Wanderer (January 2026). Tip in rupees.</caption>
       <thead>
-        <tr><th scope="col">Who</th><th scope="col" class="num">Typical tip</th></tr>
+        <tr><th scope="col">Who</th><th scope="col">Typical tip</th></tr>
       </thead>
       <tbody>
-        <tr><th scope="row">Guide at a site, half day</th><td class="num">LKR 500–1,000</td></tr>
-        <tr><th scope="row">Guide at a site, full day</th><td class="num">up to LKR 2,000</td></tr>
-        <tr><th scope="row">Safari jeep driver or guide</th><td class="num">LKR 1,000–2,500 per person per day</td></tr>
-        <tr><th scope="row">Hotel housekeeping</th><td class="num">LKR 200–300 per day</td></tr>
-        <tr><th scope="row">Hotel porter</th><td class="num">LKR 200–300 per bag</td></tr>
-        <tr><th scope="row">Restaurant without a service charge</th><td class="num">5–10% of the bill</td></tr>
+        <tr><th scope="row">Guide at a site, half day</th><td>LKR 500–1,000</td></tr>
+        <tr><th scope="row">Guide at a site, full day</th><td>up to LKR 2,000</td></tr>
+        <tr><th scope="row">Safari jeep driver or guide</th><td>LKR 1,000–2,500 per person per day</td></tr>
+        <tr><th scope="row">Hotel housekeeping</th><td>LKR 200–300 per day</td></tr>
+        <tr><th scope="row">Hotel porter</th><td>LKR 200–300 per bag</td></tr>
+        <tr><th scope="row">Restaurant without a service charge</th><td>5–10% of the bill</td></tr>
       </tbody>
     </table>
   </div>

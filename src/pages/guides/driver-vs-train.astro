@@ -53,7 +53,7 @@ const sources = [
 
   <h2>How do a driver, the train and a tuk-tuk compare?</h2>
   <div class="table-wrap">
-    <table>
+    <table class="stack">
       <caption>Driver costs are {site.name} rates; train timing is for normal service on the Kandy–Ella line.</caption>
       <thead>
         <tr>
@@ -66,39 +66,39 @@ const sources = [
       <tbody>
         <tr>
           <th scope="row">Cost</th>
-          <td>US${rates.sedan.perDay}/day per sedan, US${rates.van.perDay}/day per van; shared by the group</td>
-          <td>Cheapest per person</td>
-          <td>Agreed per ride; cheap for short hops</td>
+          <td data-label="Private driver">US${rates.sedan.perDay}/day per sedan, US${rates.van.perDay}/day per van; shared by the group</td>
+          <td data-label="Train">Cheapest per person</td>
+          <td data-label="Tuk-tuk">Agreed per ride; cheap for short hops</td>
         </tr>
         <tr>
           <th scope="row">Speed</th>
-          <td>Door to door; Kandy → Ella about {roadHours} h</td>
-          <td>Slow; Kandy → Ella normally 6–7 h</td>
-          <td>Slow; not allowed on expressways</td>
+          <td data-label="Private driver">Door to door; Kandy → Ella about {roadHours} h</td>
+          <td data-label="Train">Slow; Kandy → Ella normally 6–7 h</td>
+          <td data-label="Tuk-tuk">Slow; not allowed on expressways</td>
         </tr>
         <tr>
           <th scope="row">Comfort</th>
-          <td>Private, air-conditioned</td>
-          <td>Reserved seats are comfortable; unreserved carriages get crowded</td>
-          <td>Open-sided, no air conditioning</td>
+          <td data-label="Private driver">Private, air-conditioned</td>
+          <td data-label="Train">Reserved seats are comfortable; unreserved carriages get crowded</td>
+          <td data-label="Tuk-tuk">Open-sided, no air conditioning</td>
         </tr>
         <tr>
           <th scope="row">Luggage</th>
-          <td>Stays in the car all trip</td>
-          <td>You carry it on and off</td>
-          <td>Small bags only</td>
+          <td data-label="Private driver">Stays in the car all trip</td>
+          <td data-label="Train">You carry it on and off</td>
+          <td data-label="Tuk-tuk">Small bags only</td>
         </tr>
         <tr>
           <th scope="row">Flexibility</th>
-          <td>Stop anywhere, change the route each day</td>
-          <td>Fixed timetable, stations only</td>
-          <td>Flexible within a town</td>
+          <td data-label="Private driver">Stop anywhere, change the route each day</td>
+          <td data-label="Train">Fixed timetable, stations only</td>
+          <td data-label="Tuk-tuk">Flexible within a town</td>
         </tr>
         <tr>
           <th scope="row">Best for</th>
-          <td>Multi-stop trips, families, groups of 2+</td>
-          <td>The scenic hill-country stretch; solo budget travel</td>
-          <td>Getting around Kandy, Ella or Galle</td>
+          <td data-label="Private driver">Multi-stop trips, families, groups of 2+</td>
+          <td data-label="Train">The scenic hill-country stretch; solo budget travel</td>
+          <td data-label="Tuk-tuk">Getting around Kandy, Ella or Galle</td>
         </tr>
       </tbody>
     </table>

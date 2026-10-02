@@ -122,14 +122,14 @@ const sources = [
     including fuel, tolls and the driver's food and room. Our rates sit in the lower half of both ranges.
   </p>
   <div class="table-wrap">
-    <table>
+    <table class="stack">
       <caption>Market ranges from the guides listed under Sources.</caption>
       <thead>
         <tr><th scope="col">Vehicle</th><th scope="col" class="num">{site.name}</th><th scope="col" class="num">Typical 2026 market rate</th></tr>
       </thead>
       <tbody>
-        <tr><th scope="row">Sedan (1–3 travellers)</th><td class="num">{usd(rates.sedan.perDay)}</td><td class="num">US$55–75</td></tr>
-        <tr><th scope="row">Van (4–8 travellers)</th><td class="num">{usd(rates.van.perDay)}</td><td class="num">US$80–120</td></tr>
+        <tr><th scope="row">Sedan (1–3 travellers)</th><td class="num" data-label={site.name}>{usd(rates.sedan.perDay)}</td><td class="num" data-label="Typical 2026 market rate">US$55–75</td></tr>
+        <tr><th scope="row">Van (4–8 travellers)</th><td class="num" data-label={site.name}>{usd(rates.van.perDay)}</td><td class="num" data-label="Typical 2026 market rate">US$80–120</td></tr>
       </tbody>
     </table>
   </div>
