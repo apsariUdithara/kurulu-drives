@@ -20,7 +20,7 @@ export const site = {
   },
   driverQuoteName: 'Chaminda, Kurulu Drives driver-guide (fictional, demo business)',
   // Search console verification tokens; leave empty until you have them.
-  googleVerification: '',
+  googleVerification: 'RtAZKpOFZZ965yFJshyqOS8bwPGwFICeazcgcQUbOKc',
   bingVerification: '',
 };
 
