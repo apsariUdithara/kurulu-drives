@@ -4,13 +4,12 @@ import KeyFacts from '../components/KeyFacts.astro';
 import Cta from '../components/Cta.astro';
 import AuthorBox from '../components/AuthorBox.astro';
 import { site, rates, transfers } from '../data/site';
-import { tours } from '../data/tours';
+import { leg } from '../data/tours';
 import { photos } from '../data/photos';
 import { organization } from '../lib/schema';
 
 const base = Astro.site!;
 // Distances from Kandy, taken from the itinerary and transfer data so they match the other pages.
-const leg = (route: string) => tours.flatMap((t) => t.plan).find((d) => d.route === route)!;
 const fromSigiriya = leg('Sigiriya → Kandy');
 const toNuwara = leg('Kandy → Nuwara Eliya');
 const fromAirport = transfers.find((t) => t.to === 'Kandy')!;

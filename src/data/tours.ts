@@ -85,3 +85,6 @@ export const tours: Tour[] = [
 ];
 
 export const totalKm = (t: Tour) => t.plan.reduce((sum, d) => sum + d.km, 0);
+
+// One itinerary day by its route name, e.g. leg('Kandy → Nuwara Eliya').
+export const leg = (route: string) => tours.flatMap((t) => t.plan).find((d) => d.route === route)!;

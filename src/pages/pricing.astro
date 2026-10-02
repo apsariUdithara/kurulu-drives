@@ -5,13 +5,19 @@ import Cta from '../components/Cta.astro';
 import AuthorBox from '../components/AuthorBox.astro';
 import Sources from '../components/Sources.astro';
 import { site, rates, lkr } from '../data/site';
-import { tours, totalKm } from '../data/tours';
+import { tours, totalKm, leg } from '../data/tours';
 import { service } from '../lib/schema';
 
 const base = Astro.site!;
 const usd = (n: number) => `US$${n.toLocaleString('en-US')}`;
 const checked = new Date(site.lastUpdated).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 const perPerson = (perDay: number, people: number) => usd(Math.round(perDay / people));
+// Example day trips from Kandy, using legs from the itineraries so distances match the tour pages.
+const dayTrips = [
+  { name: 'Kandy city', d: leg('Kandy'), sights: 'Temple of the Tooth, Peradeniya gardens, Kandy Lake', roundTrip: false },
+  { name: 'Nuwara Eliya and tea country', d: leg('Kandy → Nuwara Eliya'), sights: 'Ramboda Falls, a tea factory', roundTrip: true },
+  { name: 'Sigiriya and Dambulla', d: leg('Sigiriya → Kandy'), sights: 'Sigiriya Rock, Dambulla Cave Temple', roundTrip: true },
+];
 
 const sources = [
   { title: 'Ceylon Route: Hire a private driver in Sri Lanka, cost in 2026', url: 'https://ceylonroute.com/blog/hire-private-driver-sri-lanka-cost-2026/' },
@@ -111,6 +117,37 @@ const sources = [
             <td class="num" data-label="Distance">~{totalKm(t).toLocaleString('en-US')} km</td>
             <td class="num" data-label="Sedan">{usd(t.days * rates.sedan.perDay)}<br /><span class="muted">{lkr(t.days * rates.sedan.perDay)}</span></td>
             <td class="num" data-label="Van">{usd(t.days * rates.van.perDay)}<br /><span class="muted">{lkr(t.days * rates.van.perDay)}</span></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Can I hire a driver for a day trip from Kandy?</h2>
+  <p>
+    Yes, at the same day rate: {usd(rates.sedan.perDay)} by sedan or {usd(rates.van.perDay)} by van, with fuel, tolls and
+    parking included. These are common day trips, with distances from our itineraries.
+  </p>
+  <div class="table-wrap">
+    <table class="stack">
+      <caption>Round trips to Nuwara Eliya or Sigiriya mean 5–6 hours of driving, a long day; staying a night there is easier.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Day trip</th>
+          <th scope="col">Sights</th>
+          <th scope="col" class="num">Distance</th>
+          <th scope="col">Drive time</th>
+          <th scope="col" class="num">Sedan</th>
+        </tr>
+      </thead>
+      <tbody>
+        {dayTrips.map((t) => (
+          <tr>
+            <th scope="row">{t.name}</th>
+            <td data-label="Sights">{t.sights}</td>
+            <td class="num" data-label="Distance">{t.d.km} km {t.roundTrip ? 'each way' : 'in total'}</td>
+            <td data-label="Drive time">{t.d.hours}{t.roundTrip ? ' each way' : ''}</td>
+            <td class="num" data-label="Sedan">{usd(rates.sedan.perDay)}</td>
           </tr>
         ))}
       </tbody>
