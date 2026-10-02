@@ -182,7 +182,7 @@ The About page answers "Is Kurulu Drives a real company?" with "No", explains wh
 | Step | Status (2 October 2026) |
 |---|---|
 | Deploy | Vercel, from GitHub; every push redeploys |
-| Google Search Console | Ownership verified (HTML tag); `sitemap-index.xml` submitted; manual indexing requests hit the daily quota for new properties |
+| Google Search Console | Ownership verified (HTML tag); `sitemap-index.xml` read with status **Success, 10 pages discovered**; manual indexing requests hit the daily quota for new properties ([verified](screenshots/2026-10-02-gsc-ownership-verified.png), [sitemap](screenshots/2026-10-02-gsc-sitemap-success.png), [quota](screenshots/2026-10-02-gsc-indexing-quota-exceeded.png)) |
 | Bing Webmaster Tools | Imported from Search Console (Bing powers ChatGPT search and Copilot) |
 | IndexNow | Key file published; all 10 URLs submitted to `api.indexnow.org`: **HTTP 202 Accepted** |
 | Analytics | Vercel Web Analytics on (referrers will show chatgpt.com, perplexity.ai and others) |
