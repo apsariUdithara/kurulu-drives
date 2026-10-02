@@ -10,11 +10,11 @@
 
 Kurulu Drives is a demo private-driver and tour service in Sri Lanka, built to show the full AISO loop: **Scan → Score → Generate → Publish → Re-scan**.
 
-- **Scan.** Before the site was indexed, 8 priority prompts were asked on ChatGPT (search) and Perplexity, plus a Coderra AISO scan and `site:` checks on Google and Bing.
-- **Score.** Kurulu Drives was mentioned in **0 of 16** answers and cited in **0 of 16**. **5 of 16** answers recommended a train journey that is not running end to end in 2026. ChatGPT credited the brand with another company's 29 reviews. Coderra's overall score was **55/100**: website tech 100, content 88, trust 59, AI mentions 0.
+- **Scan.** Before the site was indexed, 8 priority prompts were asked on ChatGPT (search) and Perplexity, plus `site:` checks on Google and Bing.
+- **Score.** Kurulu Drives was mentioned in **0 of 16** answers and cited in **0 of 16**. **5 of 16** answers recommended a train journey that is not running end to end in 2026. ChatGPT credited the brand with another company's 29 reviews.
 - **Generate.** A static, JavaScript-free site with 12 pages (10 question pages plus tours and guides overviews) that answer specific traveller questions first, with tables, dated sources and one consistent business entity in structured data. Lighthouse mobile on the live site: **100 / 100 / 100 / 100** on the home, pricing and tour pages (from 84 on the first production build).
 - **Publish.** Deployed on Vercel; Google Search Console verified; Bing Webmaster Tools imported; 10 URLs submitted through IndexNow (HTTP 202).
-- **Re-scan.** The same prompts at 2 and 4 weeks after indexing, plus Coderra reports and the Google and Bing AI-visibility reports. Realistic first wins: the train-status, airport-transfer and tipping questions. "Recommend a driver" will not move without real reviews.
+- **Re-scan.** The same prompts at 2 and 4 weeks after indexing, plus the Google and Bing AI-visibility reports. Realistic first wins: the train-status, airport-transfer and tipping questions. "Recommend a driver" will not move without real reviews.
 
 ---
 
@@ -51,7 +51,6 @@ To be cited, a business has to (a) be crawlable and indexed, (b) be the easiest 
 |---|---|
 | **Index status** | `site:kurulu-drives.vercel.app` on Google and Bing: **no results on either** ([Google](screenshots/2026-10-02-baseline-google-site.png), [Bing](screenshots/2026-10-02-baseline-bing-site.png)). The baseline is a true "before". |
 | **Prompt scan** | 8 prompts covering every page and intent, asked once each on **ChatGPT (search)** and **Perplexity**, fresh chat, logged out, private window. Results in [`prompts.csv`](prompts.csv). |
-| **Coderra AISO scan** | Coderra's free URL-only preview of the site |
 
 Sixteen prompts were planned; the 8 below were chosen to cover each page and intent within the time available. ChatGPT and Perplexity were picked because they show their sources most clearly and cover both a Bing-based engine and an independent index.
 
@@ -125,21 +124,6 @@ Perplexity cites niche, recently updated pages, including small operators' own w
 
 **5. The site already uses the evidence base the engines trust.** Perplexity cited rome2rio.com and thecommonwanderer.com for prompt #7; both are among this site's sources. The site offers the same base with more specific and more current figures.
 
-### Coderra AISO scan (URL-only preview)
-
-| Area | Score | Reading |
-|---|---|---|
-| **Overall** | **55 / 100** ("getting there") | |
-| Website tech ("can AI read your website?") | 100 | Static HTML, crawler access, robots.txt |
-| Content ("is your content AI-ready?") | 88 | 9 pages of 630–890 words, all with structured data |
-| Search ranking (Google and Bing) | 86 | On-page readiness; actual rankings not yet possible |
-| Trust ("does AI trust you're real?") | 59 | Clear identity on-site; no Wikipedia, Wikidata or knowledge panel |
-| AI mentions | 0 | ChatGPT only mentioned the name when asked about the brand; 0 for category, comparison and how-to questions |
-
-Coderra's biggest lever, trust, is the same conclusion as findings 3 and 4: the next gains are off-site.
-
-Two items in the preview are artefacts of a home-page-only check: "missing FAQ page and breadcrumbs" (both exist, on `/faq/` and every inner page) and "sitemap: 1 URL" (the sitemap index points to a sub-sitemap with all 10 pages).
-
 ---
 
 ## 5. Generate: what was built, and why
@@ -156,7 +140,7 @@ Two items in the preview are artefacts of a home-page-only check: "missing FAQ p
 | **Overview pages** `/tours/` and `/guides/`, with breadcrumbs Home › Tours › tour | One page answers "which tours are there?"; the nav and breadcrumbs no longer point at single pages | Site structure |
 | **Share images** (1200×630 `og:image`, large Twitter card; each tour uses its own photo) | Link previews in chat apps and some AI answer cards | Open Graph |
 | **Performance** | Phone-sized 800 px photos and an inlined 2 KB stylesheet took the home page from 84 to 100 on Lighthouse mobile; LCP 1.8 s on the live site | [Lighthouse reports](lighthouse/) |
-| **llms.txt** | Included because it costs nothing. Labelled experimental: no engine has confirmed using it. | Google; Coderra's own guidance |
+| **llms.txt** | Included because it costs nothing. Labelled experimental: no engine has confirmed using it. | Google |
 
 ### 5.2 Content
 
@@ -211,7 +195,7 @@ None of these were created for the demo: a fictional business cannot honestly ha
 
 ## 7. Re-scan: measurement and expectations
 
-**Schedule.** Day 0 is when `site:kurulu-drives.vercel.app` first returns results on Google and Bing. Re-scan at **day 0 + 2 weeks** and **+ 4 weeks**: the same 8 prompts, the same two engines, the same method, as new `phase` rows in `prompts.csv`. Coderra free reports #2 and #3 alongside.
+**Schedule.** Day 0 is when `site:kurulu-drives.vercel.app` first returns results on Google and Bing. Re-scan at **day 0 + 2 weeks** and **+ 4 weeks**: the same 8 prompts, the same two engines, the same method, as new `phase` rows in `prompts.csv`.
 
 | Area | KPI | Target | Source |
 |---|---|---|---|
@@ -256,7 +240,6 @@ None of these were created for the demo: a fictional business cannot honestly ha
 - **Location.** The scan was run from Sri Lanka; answers can differ by country.
 - **Logged-out ChatGPT** sometimes answered without searching (prompt #3).
 - **Two cells are incomplete** in `prompts.csv`: the source domains for ChatGPT #1 and Perplexity #3.
-- **Coderra.** The baseline used Coderra's URL-only preview, which checked ChatGPT only, without web search.
 - **Time.** A new domain may take weeks to be cited; the re-scans may still show zero.
 
 **Ethics.**
@@ -282,7 +265,7 @@ If Kurulu Drives became a real business, in this order:
 ## 11. Sources
 
 **AISO and search**
-- Coderra: [What is AISO?](https://coderra.com.au/blog/what-is-aiso) · [AISO product](https://www.coderra.com.au/products/aiso) · [Pricing](https://www.coderra.com.au/pricing)
+- Coderra: [What is AISO?](https://coderra.com.au/blog/what-is-aiso)
 - Search Engine Journal: [Google's new AI search guide calls AEO and GEO "still SEO"](https://www.searchenginejournal.com/googles-new-ai-search-guide-calls-aeo-and-geo-still-seo/575026/)
 - CMSWire: [Google adds AI visibility reports to Search Console](https://www.cmswire.com/digital-experience/google-adds-ai-visibility-reports-to-search-console/)
 - Bing Webmaster Blog: [AI Performance in Bing Webmaster Tools](https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview)

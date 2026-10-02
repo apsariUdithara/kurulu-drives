@@ -1,4 +1,4 @@
-# Kurulu Drives
+; ChatGPT credited the brand with another company's reviews # Kurulu Drives
 
 A demo website for a private driver and tour service in Sri Lanka, built to show **AI Search Optimisation (AISO)**: making a business easy for ChatGPT, Perplexity, Gemini, Copilot and Google's AI features to find, quote and cite.
 
@@ -17,12 +17,12 @@ A demo website for a private driver and tour service in Sri Lanka, built to show
 
 ## Results so far (2 October 2026)
 
-The work follows Coderra's AISO loop: **Scan → Score → Generate → Publish → Re-scan**. Full details in the [report](docs/AISO-REPORT.md).
+The work follows the AISO loop: **Scan → Score → Generate → Publish → Re-scan**. Full details in the [report](docs/AISO-REPORT.md).
 
 | Step | Result | Evidence |
 |---|---|---|
 | **Scan** (before indexing) | Not indexed on Google or Bing; 8 priority prompts asked on ChatGPT (search) and Perplexity | [Google](docs/screenshots/2026-10-02-baseline-google-site.png), [Bing](docs/screenshots/2026-10-02-baseline-bing-site.png), [`prompts.csv`](docs/prompts.csv) |
-| **Score** | Kurulu Drives cited in **0 of 16** answers; **5 of 16** recommended a Kandy–Ella train that is not running end to end in 2026; ChatGPT credited the brand with another company's reviews; Coderra AISO score **55/100** (website tech 100, content 88, trust 59, AI mentions 0) | [`prompts.csv`](docs/prompts.csv), [report §4](docs/AISO-REPORT.md#4-score) |
+| **Score** | Kurulu Drives cited in **0 of 16** answers; **5 of 16** recommended a Kandy–Ella train that is not running end to end in 2026; ChatGPT credited the brand with another company's reviews | [`prompts.csv`](docs/prompts.csv), [report §4](docs/AISO-REPORT.md#4-score) |
 | **Generate** | 12 answer-first pages; Lighthouse mobile on the live site **100 / 100 / 100 / 100** (from 84 on the first production build) | [Lighthouse reports](docs/lighthouse/) |
 | **Publish** | Google Search Console verified, sitemap read with **Success**; Bing Webmaster Tools imported; all URLs submitted through **IndexNow** | [verified](docs/screenshots/2026-10-02-gsc-ownership-verified.png), [sitemap](docs/screenshots/2026-10-02-gsc-sitemap-success.png) |
 | **Re-scan** | The same prompts 2 and 4 weeks after indexing | [report §7](docs/AISO-REPORT.md#7-re-scan-measurement-and-expectations) |
