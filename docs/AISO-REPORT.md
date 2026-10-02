@@ -12,7 +12,7 @@ Kurulu Drives is a demo private-driver and tour service in Sri Lanka, built to s
 
 - **Scan.** Before the site was indexed, 8 priority prompts were asked on ChatGPT (search) and Perplexity, plus a Coderra AISO scan and `site:` checks on Google and Bing.
 - **Score.** Kurulu Drives was mentioned in **0 of 16** answers and cited in **0 of 16**. **5 of 16** answers recommended a train journey that is not running end to end in 2026. ChatGPT credited the brand with another company's 29 reviews. Coderra's overall score was **55/100**: website tech 100, content 88, trust 59, AI mentions 0.
-- **Generate.** A static, JavaScript-free site with 10 pages that answer specific traveller questions first, with tables, dated sources and one consistent business entity in structured data. Lighthouse mobile on the live site: **100 / 100 / 100 / 100** on the home, pricing and tour pages (from 84 on the first production build).
+- **Generate.** A static, JavaScript-free site with 12 pages (10 question pages plus tours and guides overviews) that answer specific traveller questions first, with tables, dated sources and one consistent business entity in structured data. Lighthouse mobile on the live site: **100 / 100 / 100 / 100** on the home, pricing and tour pages (from 84 on the first production build).
 - **Publish.** Deployed on Vercel; Google Search Console verified; Bing Webmaster Tools imported; 10 URLs submitted through IndexNow (HTTP 202).
 - **Re-scan.** The same prompts at 2 and 4 weeks after indexing, plus Coderra reports and the Google and Bing AI-visibility reports. Realistic first wins: the train-status, airport-transfer and tipping questions. "Recommend a driver" will not move without real reviews.
 
@@ -152,7 +152,9 @@ Two items in the preview are artefacts of a home-page-only check: "missing FAQ p
 | **robots.txt separates search bots from training bots** | OAI-SearchBot vs GPTBot, Claude-SearchBot vs ClaudeBot, PerplexityBot are independent switches. Both groups are allowed. | OpenAI and Anthropic crawler documentation |
 | **One business entity in JSON-LD** | Organization/TravelAgency with one `@id`; Service with offers; TouristTrip per tour; Article per guide; FAQPage; BreadcrumbList. Everything points to the same `@id`. **No Review or AggregateRating**, because there are no real reviews. | schema.org; Google structured-data guidelines |
 | **Single source of truth** for name, prices and contact (`src/data/site.ts`) | Every page, table, total and JSON-LD block uses the same figures, so nothing can contradict anything else | Entity consistency |
-| **Sitemap, canonical URLs, unique titles and descriptions**; `/pricing` redirects (308) to `/pricing/` | Standard indexing; one URL per page | Google Search Central |
+| **Sitemap with `lastmod` dates, canonical URLs, unique titles and descriptions**; `/pricing` redirects (308) to `/pricing/`; `/sitemap.xml` redirects to the sitemap index | Standard indexing; one URL per page; a freshness signal; tools that probe the default sitemap path still find it | Google Search Central |
+| **Overview pages** `/tours/` and `/guides/`, with breadcrumbs Home › Tours › tour | One page answers "which tours are there?"; the nav and breadcrumbs no longer point at single pages | Site structure |
+| **Share images** (1200×630 `og:image`, large Twitter card; each tour uses its own photo) | Link previews in chat apps and some AI answer cards | Open Graph |
 | **Performance** | Phone-sized 800 px photos and an inlined 2 KB stylesheet took the home page from 84 to 100 on Lighthouse mobile; LCP 1.8 s on the live site | [Lighthouse reports](lighthouse/) |
 | **llms.txt** | Included because it costs nothing. Labelled experimental: no engine has confirmed using it. | Google; Coderra's own guidance |
 
@@ -169,11 +171,15 @@ Two items in the preview are artefacts of a home-page-only check: "missing FAQ p
 | **Honest trade-offs** | "When is the train the better choice?"; the tipping page sets out conflicting sources before recommending a range | Balanced pages are more trustworthy |
 | **Fresh, dated facts** | 2026 rail status with what reopened, what's closed and the repair targets | The scan's biggest gap |
 
-Readers were considered too: photos, jump links, tables that become cards on phones, clickable cards and a quote button that stays on screen on phones. Lighthouse accessibility is 100.
+Readers were considered too: a day-trips section with distances from the itineraries, photos, jump links, tables that become cards on phones, clickable cards and a quote button that stays on screen on phones. Lighthouse accessibility is 100.
 
 ### 5.3 Honesty
 
-The About page answers "Is Kurulu Drives a real company?" with "No", explains why there are no reviews, and states the business is not connected to any real company with a similar name. Fictional people are labelled as fictional. The email address is a non-working placeholder.
+The About page answers "Is Kurulu Drives a real company?" with "No", explains why there are no reviews, and states the business is not connected to any real company with a similar name. Fictional people are labelled as fictional. The email address is a non-working placeholder. The Key facts boxes on the home and pricing pages, the parts engines quote most, also say "Demo business", so a quoted price comes with that context.
+
+### 5.4 External audit (cross-check)
+
+An independent AISO/SEO audit of the live site (2 October 2026, without access to the source) confirmed the on-page approach: answer-first paragraphs, question headings, bylines with dates, cited sources and quotable tables. Several of its findings were artefacts of a tool that strips `<script>` tags (it reported no JSON-LD; every page has it). Its valid points were acted on the same day: the demo line in Key facts, sitemap `lastmod` and the `/sitemap.xml` redirect, the overview pages, share images and the day-trips section.
 
 ---
 
@@ -186,6 +192,8 @@ The About page answers "Is Kurulu Drives a real company?" with "No", explains wh
 | Bing Webmaster Tools | Imported from Search Console (Bing powers ChatGPT search and Copilot) |
 | IndexNow | Key file published; all 10 URLs submitted to `api.indexnow.org`: **HTTP 202 Accepted** |
 | Analytics | Vercel Web Analytics on (referrers will show chatgpt.com, perplexity.ai and others) |
+
+The two overview pages (`/tours/`, `/guides/`) were added after these submissions; they are in the sitemap and are resubmitted through IndexNow.
 
 ### Off-site plan (documented, not faked)
 
