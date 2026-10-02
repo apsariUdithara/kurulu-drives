@@ -16,7 +16,7 @@ const src = (w: number) => `/images/${p.file}-${w}.webp`;
 <figure class="photo">
   <img
     src={src(640)}
-    srcset={`${src(640)} 640w, ${src(1200)} 1200w`}
+    srcset={`${src(640)} 640w, ${src(800)} 800w, ${src(1200)} 1200w`}
     sizes={sizes}
     width="1200"
     height="800"
