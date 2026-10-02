@@ -35,7 +35,7 @@ const sources = [
 <Base
   title={t.title}
   description={`Day-by-day ${t.days}-day Sri Lanka route with km and drive time for every leg. Private driver and A/C sedan: ${usd(sedan)} in total, all-inclusive.`}
-  crumbs={[{ name: t.title, path }]}
+  crumbs={[{ name: 'Tours', path: '/tours/' }, { name: t.title, path }]}
   schema={[tourTrip(base, t, path)]}
 >
   <section class="hero">

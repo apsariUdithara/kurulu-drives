@@ -19,7 +19,9 @@ export const GET: APIRoute = ({ site }) => {
 ## Key pages
 
 - [Private driver prices in Sri Lanka](${u('/pricing/')}): day rates, what is included, totals for 7/10/14 days
+- [All tours](${u('/tours/')}): the 7, 10 and 14-day round trips compared
 ${tours.map((t) => `- [${t.title}](${u(`/tours/${t.slug}/`)}): ${t.places.join(', ')}`).join('\n')}
+- [All guides](${u('/guides/')}): overview of the travel guides below
 - [Private driver vs train vs tuk-tuk](${u('/guides/driver-vs-train/')}): cost/time comparison, 2026 hill-country rail status
 - [Colombo airport (CMB) transfers](${u('/guides/airport-transfers/')}): times, distances and prices from CMB
 - [Tipping and driver costs](${u('/guides/tipping-and-driver-costs/')}): tips, driver accommodation and meals

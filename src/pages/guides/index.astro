@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import { transfers } from '../../data/site';
+
+const kandy = transfers.find((t) => t.to === 'Kandy')!;
+const guides = [
+  {
+    href: '/guides/driver-vs-train/',
+    title: 'Private driver vs train vs tuk-tuk in Sri Lanka',
+    answer: 'Cost, speed and comfort compared, plus the 2026 rail status: the Kandy end of the hill-country line is still closed.',
+  },
+  {
+    href: '/guides/airport-transfers/',
+    title: 'Colombo Airport (CMB) transfers: times and prices',
+    answer: `Times and fixed prices from the airport to ${transfers.length} destinations; Kandy is about ${kandy.km} km and ${kandy.time} by road.`,
+  },
+  {
+    href: '/guides/tipping-and-driver-costs/',
+    title: 'Tipping and driver costs in Sri Lanka',
+    answer: "How much to tip a driver, with published figures compared, and who pays for the driver's food and room.",
+  },
+  {
+    href: '/faq/',
+    title: 'Frequently asked questions',
+    answer: 'Short answers on payment, cancellation, child seats, luggage, safety and route changes.',
+  },
+];
+---
+
+<Base
+  title="Sri Lanka travel guides for hiring a private driver"
+  description="Guides to travelling Sri Lanka with a private driver: driver vs train (with the 2026 rail status), Colombo airport transfers, and tipping and driver costs."
+  crumbs={[{ name: 'Guides', path: '/guides/' }]}
+>
+  <h1>Sri Lanka travel guides for hiring a driver</h1>
+  <p class="lead">
+    Three short, sourced guides answer the questions travellers ask most before hiring a private driver in Sri Lanka: how
+    the driver compares with the train, how to get from Colombo airport, and what to tip.
+  </p>
+
+  <h2>Which guide answers my question?</h2>
+  <div class="cards">
+    {guides.map((g) => (
+      <article class="card">
+        <h3><a href={g.href}>{g.title}</a></h3>
+        <p>{g.answer}</p>
+      </article>
+    ))}
+  </div>
+  <p>
+    For prices and routes, see <a href="/pricing/">how much a private driver in Sri Lanka costs</a> and the
+    <a href="/tours/">7, 10 and 14-day tours</a>.
+  </p>
+</Base>

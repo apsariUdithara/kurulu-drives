@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import Cta from '../../components/Cta.astro';
+import Photo from '../../components/Photo.astro';
+import { rates, lkr } from '../../data/site';
+import { tours, totalKm } from '../../data/tours';
+
+const usd = (n: number) => `US$${n.toLocaleString('en-US')}`;
+const days = tours.map((t) => t.days).join(', ').replace(/, (\d+)$/, ' and $1');
+const from = tours[0].days * rates.sedan.perDay;
+---
+
+<Base
+  title="Sri Lanka tours with a private driver: 7, 10 and 14 days"
+  description={`Three Sri Lanka round trips with a private driver: ${days} days, with distances, places and total prices from ${usd(from)} by sedan.`}
+  crumbs={[{ name: 'Tours', path: '/tours/' }]}
+>
+  <h1>Sri Lanka tours with a private driver</h1>
+  <p class="lead">
+    There are three ready-made round trips from Colombo airport (CMB): {days} days. Each has a fixed price for the driver
+    and vehicle, from {usd(from)} by sedan for {tours[0].days} days, and every route can be changed to suit you.
+  </p>
+
+  <h2>How do the {days}-day tours compare?</h2>
+  <div class="table-wrap">
+    <table class="stack">
+      <caption>Driver and vehicle for the whole trip; hotels, tickets and safaris extra. Indicative 2026 prices for a demo business.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Tour</th>
+          <th scope="col" class="num">Days</th>
+          <th scope="col" class="num">Distance</th>
+          <th scope="col" class="num">Sedan</th>
+          <th scope="col" class="num">Van</th>
+          <th scope="col">Places</th>
+        </tr>
+      </thead>
+      <tbody>
+        {tours.map((t) => (
+          <tr>
+            <th scope="row"><a href={`/tours/${t.slug}/`}>{t.title}</a></th>
+            <td class="num" data-label="Days">{t.days}</td>
+            <td class="num" data-label="Distance">~{totalKm(t).toLocaleString('en-US')} km</td>
+            <td class="num" data-label="Sedan">{usd(t.days * rates.sedan.perDay)}<br /><span class="muted">{lkr(t.days * rates.sedan.perDay)}</span></td>
+            <td class="num" data-label="Van">{usd(t.days * rates.van.perDay)}<br /><span class="muted">{lkr(t.days * rates.van.perDay)}</span></td>
+            <td data-label="Places">{t.places.join(', ')}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Which tour is right for me?</h2>
+  <div class="cards">
+    {tours.map((t) => (
+      <article class="card">
+        <Photo name={t.photo} sizes="(min-width: 820px) 340px, 100vw" />
+        <h3><a href={`/tours/${t.slug}/`}>{t.title}</a></h3>
+        <p>{t.bestFor}</p>
+        <p class="price">{usd(t.days * rates.sedan.perDay)} by sedan</p>
+        <p class="more" aria-hidden="true">View day-by-day plan →</p>
+      </article>
+    ))}
+  </div>
+  <p>
+    Not sure about the train leg or the costs? Read <a href="/guides/driver-vs-train/">private driver vs train vs tuk-tuk</a> and
+    <a href="/pricing/">how much a private driver in Sri Lanka costs</a>.
+  </p>
+
+  <Cta />
+</Base>
