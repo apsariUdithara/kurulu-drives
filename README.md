@@ -4,6 +4,8 @@ A demo website for a private driver and tour service in Sri Lanka, built to show
 
 **Live site:** https://kurulu-drives.vercel.app
 
+[![Kurulu Drives home page: private drivers and tours across Sri Lanka, with day rates and a tea estate photo](docs/screenshots/home.png)](https://kurulu-drives.vercel.app)
+
 > **Demo business.** Kurulu Drives, its people and its email address are fictional, and no bookings are taken. The travel facts (distances, 2026 rail status, tipping guidance, market prices) are real and sourced on each page. There are no reviews, ratings or testimonials, because there are no real customers.
 
 ## The business
