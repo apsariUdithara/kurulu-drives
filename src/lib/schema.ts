@@ -37,6 +37,7 @@ export function website(base: URL) {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: site.name,
+    alternateName: `${site.name} Sri Lanka`,
     url: abs(base, '/'),
     publisher: { '@id': orgId(base) },
   };
